@@ -1,18 +1,18 @@
 {
   "basics": {
     "name": "Xuguang Ai",
-    "position": "Data Scientist & Software Engineer at Yale University",
+    "position": "Data Scientist at Regenstrief Institute",
     "image": "",
     "email": "xuguang.ai@outlook.com",
     "phone": "",
     "url": "",
     "summary": "",
     "location": {
-      "address": "101 College Street",
-      "postalCode": "CT 06510",
-      "city": "New Haven",
+      "address": "1101 W 10th St",
+      "postalCode": "46202",
+      "city": "Indianapolis",
       "countryCode": "US",
-      "region": "Connecticut"
+      "region": "Indiana"
     },
     "profiles": [
       {
@@ -24,13 +24,20 @@
   },
   "work": [
     {
-      "name": "Institute for Advanced Study, Princeton University",
-      "position": "Professor of Theoretical Physics",
-      "url": "https://example.com",
-      "startDate": "1933-01-01",
-      "endDate": "1955-01-01",
-      "summary": "Teaching at Palmer Physical Laboratory (now 302 Frist Campus Center). While not a professor at Princeton, I associated with the physics professors and continued to give lectures on campus.",
-      "highlights": ["Relativity"]
+      "name": "Regenstrief Institute",
+      "position": "Data Scientist",
+      "url": "",
+      "startDate": "2026-02",
+      "endDate": "",
+      "summary": ""
+    },
+    {
+      "name": "Yale Univeristy",
+      "position": "Software Engineer",
+      "url": "",
+      "startDate": "2024-01",
+      "endDate": "2026-02",
+      "summary": ""
     }
   ],
   "education": [
@@ -66,25 +73,6 @@
       "endDate": "2014-06",
       "score": "",
       "courses": []
-    }
-  ],
-  "awards": [
-    {
-      "title": "Nobel Prize in Physics",
-      "date": "1921-11-01",
-      "awarder": "Royal Swedish Academy of Sciences",
-      "url": "https://www.nobelprize.org/prizes/physics/1921/einstein/biographical/",
-      "summary": "The Nobel Prizes are five separate prizes that, according to Alfred Nobel's will of 1895, are awarded to 'those who, during the preceding year, have conferred the greatest benefit to humankind.'"
-    }
-  ],
-  "projects": [
-    {
-      "name": "Quantum Computing",
-      "summary": "Quantum computing is the use of quantum-mechanical phenomena such as superposition and entanglement to perform computation. Computers that perform quantum computations are known as quantum computers.",
-      "highlights": ["Quantum Teleportation", "Quantum Cryptography"],
-      "startDate": "2018-01-01",
-      "endDate": "2018-01-01",
-      "url": "https://example.com"
     }
   ]
 }
