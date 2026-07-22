@@ -26,26 +26,46 @@
     {
       "name": "Regenstrief Institute",
       "position": "Data Scientist",
+      "location": "Indianapolis, Indiana, US",
       "url": "",
       "startDate": "2026-02",
       "endDate": "",
       "summary": ""
     },
     {
-      "name": "Yale Univeristy",
-      "position": "Data Scientist & Software Engineer",
+      "name": "Yale University",
+      "position": "Software Engineer",
+      "location": "New Haven, Connecticut, US",
       "url": "",
       "startDate": "2024-01",
       "endDate": "2026-02",
+      "summary": ""
+    },
+    {
+      "name": "University of Kentucky",
+      "position": "Research Assistant",
+      "location": "Lexington, Kentucky, US",
+      "url": "",
+      "startDate": "2021-08",
+      "endDate": "2023-12",
+      "summary": ""
+    },
+    {
+      "name": "Mayo Clinic",
+      "position": "Biostatistics Intern",
+      "location": "Rochester, Minnesota, US",
+      "url": "",
+      "startDate": "2022-05",
+      "endDate": "2022-08",
       "summary": ""
     }
   ],
   "education": [
     {
-      "institution": "University of Kentucky, Lexington, USA",
-      "location": "Lexington, USA",
+      "institution": "University of Kentucky",
+      "location": "Lexington, Kentucky, US",
       "url": "",
-      "area": "",
+      "area": "GPA: 4.0/4.0",
       "studyType": "M.S. in Data Science",
       "startDate": "2021-08",
       "endDate": "2023-05",
@@ -53,21 +73,21 @@
       "courses": []
     },
     {
-      "institution": "University of Kentucky, Lexington, USA",
-      "location": "Lexington, USA",
+      "institution": "University of Kentucky",
+      "location": "Lexington, Kentucky, US",
       "url": "",
-      "area": "",
+      "area": "GPA: 3.6/4.0",
       "studyType": "M.S. in Physics",
       "startDate": "2016-08",
-      "endDate": "2021-05",
+      "endDate": "2021-12",
       "score": "",
       "courses": []
     },
     {
-      "institution": "Shandong University, Jinan, China",
-      "location": "Jinan, China",
+      "institution": "Shandong University",
+      "location": "Jinan, Shandong, China",
       "url": "",
-      "area": "",
+      "area": "GPA: 89.0/100.0",
       "studyType": "B.S. in Physics",
       "startDate": "2010-09",
       "endDate": "2014-06",
