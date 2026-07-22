@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Our paper [Benchmarking LLMs for Ophthalmology (BELO): An Expert-Curated Dataset and Evaluation Framework for Knowledge and Reasoning](https://www.sciencedirect.com/science/article/pii/S2666914525003483) accepted at **Ophthalmology Science** is now online!
+Our paper [Benchmarking LLMs for Ophthalmology (BELO): An Expert-Curated Dataset and Evaluation Framework for Knowledge and Reasoning](https://www.sciencedirect.com/science/article/pii/S2666914525003483) accepted at **Ophthalmology Science** is now online.

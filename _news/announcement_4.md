@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-I am excited to join Regenstrief Institute, Inc. as a Data Scientist.
+I am excited to join Regenstrief Institute, Inc. as a Data Scientist!
