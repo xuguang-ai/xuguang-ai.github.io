@@ -408,7 +408,7 @@ ninja.data = [{
           title: 'Our paper Benchmarking LLMs for Ophthalmology (BELO): An Expert-Curated Dataset and Evaluation Framework...',
           description: "",
           section: "News",},{id: "news-i-am-excited-to-join-regenstrief-institute-inc-as-a-data-scientist",
-          title: 'I am excited to join Regenstrief Institute, Inc. as a Data Scientist.',
+          title: 'I am excited to join Regenstrief Institute, Inc. as a Data Scientist!',
           description: "",
           section: "News",},{id: "projects-project-1",
           title: 'project 1',
