@@ -26,7 +26,7 @@
     {
       "name": "Regenstrief Institute",
       "position": "Data Scientist",
-      "location": "Indianapolis, Indiana, US",
+      "location": "Indianapolis, IN",
       "url": "",
       "startDate": "2026-02",
       "endDate": "",
@@ -35,7 +35,7 @@
     {
       "name": "Yale University",
       "position": "Software Engineer",
-      "location": "New Haven, Connecticut, US",
+      "location": "New Haven, CT",
       "url": "",
       "startDate": "2024-01",
       "endDate": "2026-02",
@@ -44,7 +44,7 @@
     {
       "name": "University of Kentucky",
       "position": "Research Assistant",
-      "location": "Lexington, Kentucky, US",
+      "location": "Lexington, KY",
       "url": "",
       "startDate": "2021-08",
       "endDate": "2023-12",
@@ -53,7 +53,7 @@
     {
       "name": "Mayo Clinic",
       "position": "Biostatistics Intern",
-      "location": "Rochester, Minnesota, US",
+      "location": "Rochester, MN",
       "url": "",
       "startDate": "2022-05",
       "endDate": "2022-08",
@@ -63,7 +63,7 @@
   "education": [
     {
       "institution": "University of Kentucky",
-      "location": "Lexington, Kentucky, US",
+      "location": "Lexington, KY",
       "url": "",
       "area": "GPA: 4.0/4.0",
       "studyType": "M.S. in Data Science",
@@ -74,7 +74,7 @@
     },
     {
       "institution": "University of Kentucky",
-      "location": "Lexington, Kentucky, US",
+      "location": "Lexington, KY",
       "url": "",
       "area": "GPA: 3.6/4.0",
       "studyType": "M.S. in Physics",
@@ -85,7 +85,7 @@
     },
     {
       "institution": "Shandong University",
-      "location": "Jinan, Shandong, China",
+      "location": "Jinan, China",
       "url": "",
       "area": "GPA: 89.0/100.0",
       "studyType": "B.S. in Physics",
