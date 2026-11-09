@@ -1,0 +1,40 @@
+# Open-source projects, in display order. `install` shows a copyable command; `stat` a one-line result.
+- name: SPACESCANS
+  repo: IU-Ultraman/spacescans
+  href: https://github.com/IU-Ultraman/spacescans
+  description: >-
+    Links time-referenced geolocation data to the spatial and contextual exposome: an ontology-organized
+    exposure catalog, user-supplied datasets, cached spatial weights, and day-weighted participant-level
+    estimates.
+  install: pip install spacescans
+  langs: [Python, R, Web app]
+  links:
+    - label: PyPI
+      href: https://pypi.org/project/spacescans/
+    - label: spacescans.com
+      href: https://spacescans.com
+
+- name: FinReason Task 3
+  repo: xuguang-ai/finreason-task3-dqc
+  href: https://github.com/xuguang-ai/finreason-task3-dqc
+  description: >-
+    Exact reproduction of the XBRL US Data Quality Committee rule findings behind FinReason Cup 2026 Task 3,
+    with no language model in the loop.
+  stat: 97.50% on the hidden test set · 3rd of 23 teams
+  langs: [Python]
+
+- name: End-to-end ChemProt
+  repo: xuguang-ai/end-to-end-ChemProt
+  href: https://github.com/xuguang-ai/end-to-end-ChemProt
+  description: >-
+    Span-based end-to-end chemical–protein relation extraction with finer-grained tokenization. Code for the
+    IEEE ICHI 2023 paper.
+  langs: [Python]
+
+- name: TokenBar
+  repo: xuguang-ai/TokenBar
+  href: https://github.com/xuguang-ai/TokenBar
+  description: >-
+    Claude Code and Codex usage limits in the macOS menu bar: five-hour, weekly and per-model limits across
+    accounts, plus the agents currently running.
+  langs: [Swift, macOS]

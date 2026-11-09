@@ -1,0 +1,56 @@
+# Research directions, in display order. `visual` picks the animated illustration (ner, agent, exposome).
+# A work item either cites a paper by its key in papers.bib (link and venue come from the entry)
+# or gives title, href and venue directly.
+- index: "01"
+  label: Text
+  visual: ner
+  title: Clinical information extraction
+  summary: >-
+    Turning clinical notes and biomedical literature into structured data, end to end: entities, relations,
+    and eligibility criteria.
+  tags: [NER, Relation extraction, Clinical notes]
+  work:
+    - key: ai2023end
+      title: End-to-end chemical–protein interaction extraction
+    - key: gupta2025comparison
+      title: Pipelines vs seq2seq vs LLMs for rare-disease extraction
+    - key: chen2025clinical
+      title: Eligibility-criteria parsing with LLMs
+    - key: wang2023acquisition
+      title: A lexicon for family-history information
+
+- index: "02"
+  label: Models
+  visual: agent
+  title: LLM evaluation & agents
+  summary: >-
+    Benchmarks that measure what language models know and how they reason in medicine, and agents that use
+    clinical tools.
+  tags: [Benchmarks, Reasoning, Tool use]
+  work:
+    - key: srinivasan2025ophthalmological
+      title: OpenAI o1 vs other LLMs in ophthalmology
+    - key: srinivasan2025benchmarking
+      title: "BELO: an expert-curated ophthalmology benchmark"
+    - key: chen2025benchmarking
+      title: Benchmarking LLMs for biomedical NLP
+    - key: jin2025agentmd
+      title: "AgentMD: clinical tool learning for risk prediction"
+
+- index: "03"
+  label: Place
+  visual: exposome
+  title: Real-world data & the exposome
+  summary: >-
+    Linking where people have been to what they were exposed to, for cohorts drawn from real-world health data.
+  tags: [Geospatial linkage, Exposome, OMOP CDM]
+  work:
+    - title: "SPACESCANS: Python and R packages"
+      href: https://github.com/IU-Ultraman/spacescans
+      venue: GitHub
+    - title: SPACESCANS web application
+      href: https://spacescans.com
+      venue: spacescans.com
+    - title: pip install spacescans
+      href: https://pypi.org/project/spacescans/
+      venue: PyPI

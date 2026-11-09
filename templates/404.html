@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Page not found · {{ profile.name }}{% endblock %}
+{% block content %}
+<main>
+  <section class="hero notfound">
+    <div class="hero-bg" aria-hidden="true"><div class="grid"></div><div class="glow"></div></div>
+    <div class="container">
+      <p class="eyebrow"><span class="idx">404</span> Page not found</p>
+      <h1 class="statement">This page doesn't exist.</h1>
+      <p class="lede">The site was rebuilt in 2026 and some old pages were retired.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="/">Back to the home page</a>
+        <a class="btn btn-ghost" href="/#publications">Publications</a>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

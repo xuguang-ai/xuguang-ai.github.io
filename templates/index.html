@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+{% from "partials/visuals.html" import visual %}
+{% block content %}
+<main>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"><div class="grid"></div><div class="glow"></div></div>
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <div class="hero-id">
+          <img src="{{ asset('img/portrait-sm.jpg') }}" alt="" width="88" height="88">
+          <div class="who"><b>{{ profile.name }}</b><span>{{ profile.role }} · {{ profile.affiliation }}</span></div>
+        </div>
+        {% if profile.latest %}
+        <a class="pill intro" href="{{ profile.latest.href }}">
+          <span class="pill-tag">Latest</span>
+          <span class="pill-text">{{ profile.latest.text }}</span>
+          <svg class="ico"><use href="#i-arrow"/></svg>
+        </a>
+        {% endif %}
+        <h1 class="statement intro" style="--rd:.08s">{{ profile.headline_html|safe }}</h1>
+        <p class="lede intro" style="--rd:.16s">{{ profile.lede_html|safe }}</p>
+        <div class="cta-row intro" style="--rd:.24s">
+          <a class="btn btn-primary" href="mailto:{{ profile.email }}"><svg class="ico"><use href="#i-mail"/></svg>Get in touch</a>
+          <a class="btn btn-ghost" href="{{ profile.links.scholar }}">Google Scholar<svg class="ico"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-ghost" href="{{ profile.links.github }}">GitHub<svg class="ico"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-ghost" href="{{ profile.links.linkedin }}">LinkedIn<svg class="ico"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+      <figure class="portrait intro" style="--rd:.2s">
+        <div class="portrait-frame"><img src="{{ asset('img/portrait.jpg') }}" alt="Portrait of {{ profile.name }}" width="1000" height="800"></div>
+        <figcaption>
+          <b>{{ profile.name }}</b>
+          <span>{{ profile.role }}</span>
+          <span class="live"><span class="live-dot" aria-hidden="true"></span>{{ profile.affiliation }} · {{ profile.city }}</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Research directions -->
+  <section class="section" id="research">
+    <div class="container">
+      <div class="section-head">
+        <div class="reveal">
+          <p class="eyebrow"><span class="idx">01</span> Research</p>
+          <h2>Research directions</h2>
+        </div>
+        <p class="section-sub reveal" style="--rd:.1s">Three threads, from reading clinical text, to measuring what language models get right, to the environments patients live in.</p>
+      </div>
+      <div class="rcards">
+        {% for d in research %}
+        <article class="card rcard reveal" style="--rd:{{ loop.index0 * 0.08 }}s" data-spotlight>
+          {{ visual(d.visual) }}
+          <div class="rbody">
+            <div class="rmeta"><span class="idx">{{ d.index }}</span><span>{{ d.label }}</span></div>
+            <h3>{{ d.title }}</h3>
+            <p>{{ d.summary }}</p>
+            <ul class="tags">{% for t in d.tags %}<li>{{ t }}</li>{% endfor %}</ul>
+            <button class="rtoggle" type="button" aria-expanded="false" aria-controls="work-{{ d.index }}">Representative work <span class="plus" aria-hidden="true"></span></button>
+            <div class="rmore" id="work-{{ d.index }}"><div>
+              <ul class="work">
+                {% for w in d.work %}
+                <li><a href="{{ w.href }}">{{ w.title }}</a><span>{{ w.venue }}</span></li>
+                {% endfor %}
+              </ul>
+            </div></div>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Selected research -->
+  <section class="section" id="selected">
+    <div class="container">
+      <div class="section-head">
+        <div class="reveal">
+          <p class="eyebrow"><span class="idx">02</span> Selected research</p>
+          <h2>Selected research</h2>
+        </div>
+        <p class="section-sub reveal" style="--rd:.1s">{{ selected|length }} papers that show the range of the work. The full list is <a href="#publications">below</a>.</p>
+      </div>
+      <div class="sel">
+        {% for p in selected %}
+        <article class="sel-row reveal">
+          <div class="sel-meta"><span class="venue">{{ p.venue_name }}</span>{{ p.year }}<br><span class="role{% if p.owner_position == 1 %} first{% endif %}">{{ p.role }}</span></div>
+          <div>
+            <h3 class="sel-title"><a href="{{ p.url }}">{{ p.short_title }}</a></h3>
+            <p class="sel-take">{{ p.takeaway }}</p>
+          </div>
+          <div class="links">
+            <a class="lnk" href="{{ p.url }}">Paper<svg class="ico"><use href="#i-arrow"/></svg></a>
+            {% if p.pdf %}<a class="lnk" href="{{ p.pdf }}">PDF</a>{% endif %}
+            {% if p.code %}<a class="lnk" href="{{ p.code }}">Code</a>{% endif %}
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Open source -->
+  <section class="section" id="open-source">
+    <div class="container">
+      <div class="section-head">
+        <div class="reveal">
+          <p class="eyebrow"><span class="idx">03</span> Open source</p>
+          <h2>Open source</h2>
+        </div>
+        <p class="section-sub reveal" style="--rd:.1s">Software I build and maintain, from research packages to small tools. More on <a href="{{ profile.links.github }}">GitHub</a>.</p>
+      </div>
+      <div class="oss">
+        {% for s in software %}
+        <article class="card ocard reveal" style="--rd:{{ (loop.index0 % 2) * 0.08 }}s" data-spotlight>
+          <div class="ocard-head"><span>{{ s.repo }}</span><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></div>
+          <h3><a class="stretched" href="{{ s.href }}">{{ s.name }}</a></h3>
+          <p>{{ s.description }}</p>
+          {% if s.install %}
+          <div class="term above"><span><span class="prompt">$</span>{{ s.install }}</span><button class="copy" type="button" data-copy="{{ s.install }}">Copy</button></div>
+          {% endif %}
+          {% if s.stat %}<p class="stat">{{ s.stat }}</p>{% endif %}
+          <div class="ocard-foot">
+            {% for l in s.lang_items %}<span class="lang"><i{% if l.color %} style="background:{{ l.color }}"{% endif %}></i>{{ l.name }}</span>{% endfor %}
+            {% for link in s.links|default([]) %}<a class="lnk above" href="{{ link.href }}">{{ link.label }}<svg class="ico"><use href="#i-arrow"/></svg></a>{% endfor %}
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Publications -->
+  <section class="section" id="publications">
+    <div class="container">
+      <div class="section-head">
+        <div class="reveal">
+          <p class="eyebrow"><span class="idx">04</span> Publications</p>
+          <h2>Publications</h2>
+        </div>
+        <p class="section-sub reveal" style="--rd:.1s">{{ n_papers }} peer-reviewed papers, newest first. Also on <a href="{{ profile.links.scholar }}">Google Scholar</a>.</p>
+      </div>
+      <div class="pubs">
+        {% for y in years %}
+        <div class="pub-year reveal"><h3>{{ y.year }}</h3><div>
+          {% for p in y.papers %}
+          <article class="pub">
+            <h4 class="pub-title"><a href="{{ p.url }}">{{ p.title }}</a></h4>
+            <div class="pub-authors">{{ p.authors_compact|safe }}</div>
+            {% if p.n_authors > 6 %}
+            <details class="all-authors"><summary>All {{ p.n_authors }} authors</summary><p>{{ p.authors_full|safe }}</p></details>
+            {% endif %}
+            <div class="pub-venue">{{ p.venue_html|safe }}, {{ p.year }}</div>
+            <div class="links">
+              {% if p.doi %}<a class="lnk" href="{{ p.url }}">DOI</a>{% endif %}
+              {% if p.pdf %}<a class="lnk" href="{{ p.pdf }}">PDF</a>{% endif %}
+              {% if p.code %}<a class="lnk" href="{{ p.code }}">Code</a>{% endif %}
+              <button class="lnk" type="button" data-copy="{{ p.bibtex }}" data-done="BibTeX copied">BibTeX</button>
+            </div>
+          </article>
+          {% endfor %}
+        </div></div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-head">
+        <div class="reveal">
+          <p class="eyebrow"><span class="idx">05</span> About</p>
+          <h2>About</h2>
+        </div>
+        {% if profile.cv_pdf %}
+        <div class="reveal section-cv" style="--rd:.1s"><a class="btn btn-ghost" href="/static/{{ profile.cv_pdf }}"><svg class="ico"><use href="#i-down"/></svg>Download CV (PDF)</a></div>
+        {% endif %}
+      </div>
+      <div class="about">
+        <div class="about-copy reveal">
+          {% for para in profile.about_html %}<p>{{ para|safe }}</p>{% endfor %}
+        </div>
+        <div class="reveal" style="--rd:.1s">
+          <p class="eyebrow tl-label">Experience</p>
+          <ol class="timeline">
+            {% for e in profile.experience %}
+            <li{% if e.get("current") %} class="now"{% endif %}><div class="when">{{ e.when }}</div><div class="what">{{ e.what }}</div><div class="where">{{ e.where }}</div></li>
+            {% endfor %}
+          </ol>
+          <p class="eyebrow tl-label">Education</p>
+          <ol class="timeline">
+            {% for e in profile.education %}
+            <li><div class="when">{{ e.when }}</div><div class="what">{{ e.what }}</div><div class="where">{{ e.where }}</div></li>
+            {% endfor %}
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="container">
+      <p class="eyebrow reveal"><span class="idx">06</span> Contact</p>
+      <h2 class="reveal" style="--rd:.06s">{{ profile.contact.heading }}</h2>
+      <p class="reveal" style="--rd:.12s">{{ profile.contact.text }}</p>
+      <div class="cta-row reveal" style="--rd:.18s">
+        <a class="btn btn-primary" href="mailto:{{ profile.email }}"><svg class="ico"><use href="#i-mail"/></svg>{{ profile.email }}</a>
+        <button class="btn btn-ghost" type="button" data-copy="{{ profile.email }}" data-done="Email copied">Copy email</button>
+      </div>
+      <footer class="foot">
+        <span>© {{ year }} {{ profile.name }} · {{ profile.location }}</span>
+        <span><a href="{{ profile.links.scholar }}">Scholar</a> · <a href="{{ profile.links.github }}">GitHub</a> · <a href="{{ profile.links.linkedin }}">LinkedIn</a></span>
+      </footer>
+    </div>
+  </section>
+</main>
+{% endblock %}

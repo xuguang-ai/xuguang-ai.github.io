@@ -1,0 +1,32 @@
+# Selected research, in display order. `key` points to papers.bib; venue, year, links and the author role
+# (first, second or co-author) come from the entry. `title` is a short display title; `takeaway` must stay
+# faithful to the paper's abstract.
+- key: jin2025agentmd
+  title: "AgentMD: language agents for risk prediction with large-scale clinical tool learning"
+  takeaway: >-
+    An agent that curated 2,164 executable clinical calculators from PubMed and applies them to patient risk
+    prediction: 87.7% accuracy, against 40.9% for GPT-4.
+
+- key: srinivasan2025ophthalmological
+  title: Ophthalmological question answering and reasoning using OpenAI o1 vs other large language models
+  takeaway: >-
+    On 6,990 ophthalmology questions, o1 was the most accurate model but trailed GPT-4o and GPT-4 on several
+    text-generation metrics; experts rated its answers more useful and better organized.
+
+- key: srinivasan2025benchmarking
+  title: "BELO: an expert-curated benchmark for knowledge and reasoning in ophthalmology"
+  takeaway: >-
+    900 questions, checked over several rounds by 13 ophthalmologists, that score both accuracy and reasoning
+    quality; kept as a hold-out set with a public leaderboard.
+
+- key: chen2025benchmarking
+  title: Benchmarking large language models for biomedical natural language processing
+  takeaway: >-
+    Four LLMs on 12 BioNLP benchmarks across six applications: traditional fine-tuning still wins most tasks,
+    while GPT-4 leads on reasoning-heavy medical question answering.
+
+- key: ai2023end
+  title: End-to-end models for chemical–protein interaction extraction
+  takeaway: >-
+    A span-based pipeline with finer-grained tokenization set a new state of the art for end-to-end relation
+    extraction on ChemProt, improving F1 by more than 4% over the previous best.

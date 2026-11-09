@@ -1,0 +1,71 @@
+# Who I am: hero, about, timeline and contact. Fields that hold HTML are marked; the rest are plain text.
+name: Xuguang Ai
+initials: XA
+role: Data Scientist
+affiliation: Regenstrief Institute
+city: Indianapolis
+location: Indianapolis, IN
+email: xuguang.ai@outlook.com
+description: >-
+  Xuguang Ai is a data scientist at Regenstrief Institute working on clinical natural language processing,
+  large language models for medicine, and real-world health data.
+
+links:
+  scholar: https://scholar.google.com/citations?user=lqV5j78AAAAJ
+  github: https://github.com/xuguang-ai
+  linkedin: https://www.linkedin.com/in/xuguang-ai-306375225/
+
+# Path under static/ of a CV PDF. The CV buttons appear only when this is set, e.g. cv_pdf: cv.pdf
+cv_pdf:
+
+# One current item shown as a pill above the headline (replaces a news list). Remove it to hide the pill.
+latest:
+  text: 3rd of 23 teams, FinReason Cup 2026 Task 3
+  href: "#open-source"
+
+headline_html: I build and evaluate AI for clinical text and <span class="nowrap">real-world</span> health data.
+lede_html: >-
+  I'm <strong>Xuguang Ai</strong>, a data scientist at Regenstrief Institute. I extract structured information
+  from clinical text, test how well large language models know and reason about medicine, and link where
+  patients live to what they are exposed to.
+
+about_html:
+  - >-
+    I'm a <strong>data scientist at Regenstrief Institute</strong> in Indianapolis. Before that I was a data
+    scientist and software engineer in Biomedical Informatics &amp; Data Science at Yale School of Medicine,
+    where I worked with <a href="https://medicine.yale.edu/profile/qingyu-chen/">Qingyu Chen</a> and
+    <a href="https://medicine.yale.edu/profile/hua-xu/">Hua Xu</a> on language models for medicine.
+  - >-
+    I trained first in physics, then in data science at the University of Kentucky, where
+    <a href="https://engr.uky.edu/people/ramakanth-kavuluru">Ramakanth Kavuluru</a> advised my work on
+    biomedical information extraction.
+
+experience:
+  - when: 2026 — now
+    what: Data Scientist
+    where: Regenstrief Institute
+    current: true
+  - when: 2024 — 2026
+    what: Data Scientist & Software Engineer
+    where: Biomedical Informatics & Data Science, Yale School of Medicine
+  - when: "2022"
+    what: Biostatistics Intern
+    where: Artificial Intelligence & Informatics, Mayo Clinic
+  - when: 2021 — 2023
+    what: Research Assistant
+    where: Computer Science, University of Kentucky
+
+education:
+  - when: "2023"
+    what: M.S. Data Science
+    where: University of Kentucky
+  - when: "2021"
+    what: M.S. Physics
+    where: University of Kentucky
+  - when: "2014"
+    what: B.S. Physics
+    where: Shandong University
+
+contact:
+  heading: Let's work on clinical AI that holds up.
+  text: I'm glad to talk about clinical NLP, LLM evaluation, and exposome research.
