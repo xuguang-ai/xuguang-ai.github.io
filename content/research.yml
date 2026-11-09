@@ -52,14 +52,11 @@
     trial data.
   tags: [Geospatial linkage, Exposome, OMOP CDM]
   work:
-    - title: "SPACESCANS: Python and R packages"
-      href: https://github.com/IU-Ultraman/spacescans
-      venue: GitHub
     - title: SPACESCANS web application
+      href: https://github.com/IU-Ultraman/spacescans-web
+      venue: GitHub
+    - title: SPACESCANS website
       href: https://spacescans.com
       venue: spacescans.com
-    - title: pip install spacescans
-      href: https://pypi.org/project/spacescans/
-      venue: PyPI
     - key: huang2026mo1637
       title: Early anti-TNF responder prediction in pediatric Crohn's disease
