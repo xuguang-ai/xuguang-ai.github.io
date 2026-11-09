@@ -38,7 +38,7 @@ REDIRECTS = {
     "news/": "/",
 }
 
-LANG_COLORS = {"Python": "#3572a5", "R": "#198ce7", "Swift": "#f05138"}
+LANG_COLORS = {"Python": "#3572a5", "R": "#198ce7", "Swift": "#f05138", "TypeScript": "#3178c6"}
 BIBTEX_FIELDS = ["title", "author", "journal", "booktitle", "series", "volume", "number", "pages",
                  "year", "publisher", "howpublished", "note", "doi", "url"]
 ALL_AUTHORS_UP_TO = 5  # lists with at most this many authors are shown in full

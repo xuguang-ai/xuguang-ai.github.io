@@ -1,17 +1,14 @@
 # Open-source projects, in display order. `install` shows a copyable command. With an odd number of
 # projects the first card spans the full width.
 - name: SPACESCANS
-  repo: IU-Ultraman/spacescans
-  href: https://github.com/IU-Ultraman/spacescans
+  repo: IU-Ultraman/spacescans-web
+  href: https://github.com/IU-Ultraman/spacescans-web
   description: >-
-    Links time-referenced geolocation data to the spatial and contextual exposome: an ontology-organized
-    exposure catalog, user-supplied datasets, cached spatial weights, and day-weighted participant-level
-    estimates.
-  install: pip install spacescans
-  langs: [Python, R, Web app]
+    Web application for SPACESCANS: browse the ontology-organized exposure catalog, add your own datasets,
+    check cohort coverage, link location episodes to the spatial and contextual exposome and inspect the
+    results. Runs in Docker on your computer or server, where cohort data stay.
+  langs: [Python, TypeScript, R]
   links:
-    - label: PyPI
-      href: https://pypi.org/project/spacescans/
     - label: spacescans.com
       href: https://spacescans.com
 
