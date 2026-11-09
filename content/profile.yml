@@ -8,7 +8,7 @@ location: Indianapolis, IN
 email: xuguang.ai@outlook.com
 description: >-
   Xuguang Ai is a data scientist at Regenstrief Institute working on clinical natural language processing,
-  large language models for medicine, and real-world health data.
+  language and multimodal models for medicine, and real-world health data.
 
 links:
   scholar: https://scholar.google.com/citations?user=lqV5j78AAAAJ
@@ -23,17 +23,19 @@ latest:
   text: 3rd of 23 teams, FinReason Cup 2026 Task 3
   href: "#open-source"
 
-headline_html: I build and evaluate AI for clinical text and <span class="nowrap">real-world</span> health data.
+headline_html: I build and evaluate AI for <span class="nowrap">real-world</span> health data.
 lede_html: >-
   I'm <strong>Xuguang Ai</strong>, a data scientist at Regenstrief Institute. I extract structured information
-  from clinical text, test how well large language models know and reason about medicine, and link where
+  from clinical text, build and evaluate language and multimodal models for medicine, and link where
   patients live to what they are exposed to.
+research_intro: >-
+  Three threads: extracting information from clinical text, building and testing language and multimodal
+  models for medicine, and linking patients to the environments they live in.
 
 about_html:
   - >-
     I'm a <strong>data scientist at Regenstrief Institute</strong> in Indianapolis. Before that I was a data
-    scientist and software engineer in Biomedical Informatics &amp; Data Science at Yale School of Medicine,
-    where I worked with <a href="https://medicine.yale.edu/profile/qingyu-chen/">Qingyu Chen</a> and
+    scientist in Biomedical Informatics &amp; Data Science at Yale School of Medicine, where I worked with <a href="https://medicine.yale.edu/profile/qingyu-chen/">Qingyu Chen</a> and
     <a href="https://medicine.yale.edu/profile/hua-xu/">Hua Xu</a> on language models for medicine.
   - >-
     I trained first in physics, then in data science at the University of Kentucky, where
@@ -46,10 +48,10 @@ experience:
     where: Regenstrief Institute
     current: true
   - when: 2024 — 2026
-    what: Data Scientist & Software Engineer
+    what: Data Scientist
     where: Biomedical Informatics & Data Science, Yale School of Medicine
   - when: "2022"
-    what: Biostatistics Intern
+    what: Data Scientist Intern
     where: Artificial Intelligence & Informatics, Mayo Clinic
   - when: 2021 — 2023
     what: Research Assistant
@@ -65,6 +67,24 @@ education:
   - when: "2014"
     what: B.S. Physics
     where: Shandong University
+
+# Venues the owner has reviewed for (names only; never manuscript details).
+reviewing:
+  journals:
+    - JAMA Ophthalmology
+    - IEEE Journal of Biomedical and Health Informatics
+    - JMIR Medical Informatics
+    - Transactions on Machine Learning Research
+    - Database (Oxford University Press)
+    - Frontiers in Digital Health
+    - Humanities and Social Sciences Communications
+  conferences:
+    - KDD 2026, 2027
+    - AMIA Annual Symposium 2025, 2026
+    - AMIA Amplify Informatics Conference 2026
+    - AMIA Clinical Informatics Conference 2025
+    - COLING 2025
+    - IEEE/ACM CHASE 2024
 
 contact:
   heading: Let's work on clinical AI that holds up.

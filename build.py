@@ -40,7 +40,8 @@ REDIRECTS = {
 
 LANG_COLORS = {"Python": "#3572a5", "R": "#198ce7", "Swift": "#f05138"}
 BIBTEX_FIELDS = ["title", "author", "journal", "booktitle", "series", "volume", "number", "pages",
-                 "year", "publisher", "note", "doi"]
+                 "year", "publisher", "howpublished", "note", "doi", "url"]
+ALL_AUTHORS_UP_TO = 5  # lists with at most this many authors are shown in full
 FORBIDDEN = ["Einstein", "al-folio", "example_pdf", "Lorem ipsum", "TODO"]
 
 
@@ -86,29 +87,27 @@ def initials(given: str) -> str:
     return "".join("-".join(p[0] for p in word.split("-") if p) for word in given.replace(".", " ").split())
 
 
-def author_line(authors: list[tuple[str, str]], owner: int, compact: bool) -> str:
-    """Authors as 'Family Initials'. Compact form: first three, the owner, and the last author."""
+def author_line(authors: list[tuple[str, str]], owner: int, equal: int) -> str:
+    """'Family Initials' from the first author through the site owner (at least three), then 'et al.'.
+
+    Short lists are shown in full. The first `equal` authors contributed equally and get an asterisk.
+    """
     def name(i: int) -> str:
         fam, giv = authors[i]
-        text = html.escape(f"{fam} {initials(giv)}".strip())
+        text = html.escape(f"{fam} {initials(giv)}".strip()) + ("*" if i < equal else "")
         return f'<b class="me">{text}</b>' if i == owner else text
 
     n = len(authors)
-    shown = list(range(n))
-    if compact and n > 6:
-        shown = sorted({0, 1, 2, owner, n - 1})
-    parts, prev = [], None
-    for i in shown:
-        if prev is not None:
-            parts.append(" … " if i - prev > 1 else ", ")
-        parts.append(name(i))
-        prev = i
-    return "".join(parts)
+    shown = n if n <= ALL_AUTHORS_UP_TO else max(3, owner + 1)
+    line = ", ".join(name(i) for i in range(shown))
+    return line + (", et al." if shown < n else "")
 
 
 def venue_html(f: dict, kind: str) -> str:
     """Journal or proceedings with volume, issue and pages, e.g. 'JAMA Ophthalmology 143(9):740–748'."""
-    if kind == "article":
+    if kind == "misc":
+        out = html.escape(tex(f.get("howpublished", "Preprint")))
+    elif kind == "article":
         out = f"<i>{html.escape(tex(f['journal']))}</i>"
         if f.get("volume"):
             out += f" {html.escape(f['volume'])}"
@@ -147,26 +146,41 @@ def load_papers() -> list[dict]:
             fam, _, giv = a.partition(",")
             authors.append((tex(fam.strip()), tex(giv.strip())))
         owner = next((i for i, a in enumerate(authors) if a == OWNER), -1)
+        equal = int(f.get("equal", 0))
+        doi_url = f"https://doi.org/{f['doi']}" if f.get("doi") else None
+        group = "preprint" if kind == "misc" else f.get("kind", "journal" if kind == "article" else "conference")
+        venue_name = {"article": tex(f.get("journal", "")), "misc": tex(f.get("howpublished", "Preprint"))}.get(
+            kind, f.get("abbr", tex(f.get("booktitle", ""))))
         papers.append({
             "key": entry["key"],
             "kind": kind,
+            "group": group,
             "title": tex(f["title"]),
             "year": f["year"],
             "abbr": f.get("abbr", ""),
-            "venue_name": tex(f["journal"]) if kind == "article" else f.get("abbr", tex(f.get("booktitle", ""))),
+            "venue_name": venue_name,
             "venue_html": venue_html(f, kind),
             "doi": f.get("doi"),
-            "url": f"https://doi.org/{f['doi']}" if f.get("doi") else f.get("url"),
+            "url": doi_url or f.get("url") or f.get("preprint"),
+            "arxiv": f.get("url") if "arxiv.org" in f.get("url", "") else None,
+            "preprint": f.get("preprint"),
             "pdf": f.get("pdf"),
             "code": f.get("code"),
             "n_authors": len(authors),
             "owner_position": owner + 1,
-            "role": {1: "First author", 2: "Second author"}.get(owner + 1, "Co-author"),
-            "authors_compact": author_line(authors, owner, compact=True),
-            "authors_full": author_line(authors, owner, compact=False),
+            "equal": equal,
+            "authors_html": author_line(authors, owner, equal),
             "bibtex": bibtex_text(entry),
         })
     return papers
+
+
+def by_year(papers: list[dict]) -> list[dict]:
+    """Group papers by year, newest year first, keeping file order within a year."""
+    years: dict[str, list[dict]] = {}
+    for p in papers:
+        years.setdefault(p["year"], []).append(p)
+    return [{"year": y, "papers": years[y]} for y in sorted(years, reverse=True)]
 
 
 # ---------------------------------------------------------------- Build
@@ -205,12 +219,10 @@ def build() -> dict:
         project.setdefault("links", [])
         project["lang_items"] = [{"name": n, "color": LANG_COLORS.get(n)} for n in project.get("langs", [])]
 
-    years = []
-    for p in papers:
-        if not years or years[-1]["year"] != p["year"]:
-            years.append({"year": p["year"], "papers": []})
-        years[-1]["papers"].append(p)
-    years.sort(key=lambda y: y["year"], reverse=True)
+    reviewed = [p for p in papers if p["group"] != "preprint"]
+    preprints = [p for p in papers if p["group"] == "preprint"]
+    pub_groups = [{"title": "Peer-reviewed", "years": by_year(reviewed)},
+                  {"title": "Preprints", "years": by_year(preprints)}]
 
     person = {
         "@context": "https://schema.org", "@type": "Person", "name": profile["name"], "url": SITE_URL + "/",
@@ -223,7 +235,8 @@ def build() -> dict:
     env.globals.update(asset=asset_url, site_url=SITE_URL, year=dt.date.today().year,
                        person_jsonld=json.dumps(person, ensure_ascii=False).replace("</", "<\\/"))
     ctx = {"profile": profile, "research": research, "selected": selected, "software": software,
-           "years": years, "n_papers": len(papers)}
+           "pub_groups": pub_groups, "n_reviewed": len(reviewed), "n_preprints": len(preprints),
+           "has_equal": any(p["equal"] for p in papers)}
 
     if OUT.exists():
         shutil.rmtree(OUT)

@@ -7,33 +7,39 @@
   title: Clinical information extraction
   summary: >-
     Turning clinical notes and biomedical literature into structured data, end to end: entities, relations,
-    and eligibility criteria.
+    eligibility criteria, and chart review over a patient's longitudinal record.
   tags: [NER, Relation extraction, Clinical notes]
   work:
-    - key: ai2023end
-      title: End-to-end chemical–protein interaction extraction
+    - key: jiang2026agentic
+      title: Agentic chart review from longitudinal clinical notes
+    - key: brokman2025benchmark
+      title: Zero-shot biomedical relation extraction with LLMs
     - key: gupta2025comparison
       title: Pipelines vs seq2seq vs LLMs for rare-disease extraction
     - key: chen2025clinical
       title: Eligibility-criteria parsing with LLMs
-    - key: wang2023acquisition
-      title: A lexicon for family-history information
+    - key: ai2023end
+      title: End-to-end chemical–protein interaction extraction
 
 - index: "02"
   label: Models
   visual: agent
-  title: LLM evaluation & agents
+  title: Language & multimodal models
   summary: >-
-    Benchmarks that measure what language models know and how they reason in medicine, and agents that use
-    clinical tools.
-  tags: [Benchmarks, Reasoning, Tool use]
+    Open models and benchmarks for medicine, from ophthalmology to dermatology, and agents that use clinical
+    tools.
+  tags: [Benchmarks, Multimodal, Agents]
   work:
+    - key: kim2026leme
+      title: "LEME: open LLMs for ophthalmology"
     - key: srinivasan2025ophthalmological
       title: OpenAI o1 vs other LLMs in ophthalmology
     - key: srinivasan2025benchmarking
       title: "BELO: an expert-curated ophthalmology benchmark"
-    - key: chen2025benchmarking
-      title: Benchmarking LLMs for biomedical NLP
+    - key: kim2026medpmc
+      title: "MedPMC: medical multimodal data for foundation models"
+    - key: jiang2026multimodal
+      title: Multimodal LLMs in clinical dermatology
     - key: jin2025agentmd
       title: "AgentMD: clinical tool learning for risk prediction"
 
@@ -42,7 +48,8 @@
   visual: exposome
   title: Real-world data & the exposome
   summary: >-
-    Linking where people have been to what they were exposed to, for cohorts drawn from real-world health data.
+    Linking where people have been to what they were exposed to, and predictive models built on cohort and
+    trial data.
   tags: [Geospatial linkage, Exposome, OMOP CDM]
   work:
     - title: "SPACESCANS: Python and R packages"
@@ -54,3 +61,5 @@
     - title: pip install spacescans
       href: https://pypi.org/project/spacescans/
       venue: PyPI
+    - key: huang2026mo1637
+      title: Early anti-TNF responder prediction in pediatric Crohn's disease

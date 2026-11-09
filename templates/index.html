@@ -46,7 +46,7 @@
           <p class="eyebrow"><span class="idx">01</span> Research</p>
           <h2>Research directions</h2>
         </div>
-        <p class="section-sub reveal" style="--rd:.1s">Three threads, from reading clinical text, to measuring what language models get right, to the environments patients live in.</p>
+        <p class="section-sub reveal" style="--rd:.1s">{{ profile.research_intro }}</p>
       </div>
       <div class="rcards">
         {% for d in research %}
@@ -85,7 +85,7 @@
       <div class="sel">
         {% for p in selected %}
         <article class="sel-row reveal">
-          <div class="sel-meta"><span class="venue">{{ p.venue_name }}</span>{{ p.year }}<br><span class="role{% if p.owner_position == 1 %} first{% endif %}">{{ p.role }}</span></div>
+          <div class="sel-meta"><span class="venue">{{ p.venue_name }}</span>{{ p.year }}</div>
           <div>
             <h3 class="sel-title"><a href="{{ p.url }}">{{ p.short_title }}</a></h3>
             <p class="sel-take">{{ p.takeaway }}</p>
@@ -139,21 +139,22 @@
           <p class="eyebrow"><span class="idx">04</span> Publications</p>
           <h2>Publications</h2>
         </div>
-        <p class="section-sub reveal" style="--rd:.1s">{{ n_papers }} peer-reviewed papers, newest first. Also on <a href="{{ profile.links.scholar }}">Google Scholar</a>.</p>
+        <p class="section-sub reveal" style="--rd:.1s">{{ n_reviewed }} peer-reviewed papers and {{ n_preprints }} preprints, newest first.{% if has_equal %} *&nbsp;marks equal contribution.{% endif %} Also on <a href="{{ profile.links.scholar }}">Google Scholar</a>.</p>
       </div>
-      <div class="pubs">
-        {% for y in years %}
-        <div class="pub-year reveal"><h3>{{ y.year }}</h3><div>
+      {% for g in pub_groups %}
+      <div class="pub-group">
+        <h3 class="pub-group-title reveal">{{ g.title }}</h3>
+        {% for y in g.years %}
+        <div class="pub-year reveal"><h4 class="pub-year-label">{{ y.year }}</h4><div>
           {% for p in y.papers %}
           <article class="pub">
-            <h4 class="pub-title"><a href="{{ p.url }}">{{ p.title }}</a></h4>
-            <div class="pub-authors">{{ p.authors_compact|safe }}</div>
-            {% if p.n_authors > 6 %}
-            <details class="all-authors"><summary>All {{ p.n_authors }} authors</summary><p>{{ p.authors_full|safe }}</p></details>
-            {% endif %}
+            <h5 class="pub-title"><a href="{{ p.url }}">{{ p.title }}</a></h5>
+            <div class="pub-authors">{{ p.authors_html|safe }}</div>
             <div class="pub-venue">{{ p.venue_html|safe }}, {{ p.year }}</div>
             <div class="links">
-              {% if p.doi %}<a class="lnk" href="{{ p.url }}">DOI</a>{% endif %}
+              {% if p.doi %}<a class="lnk" href="https://doi.org/{{ p.doi }}">DOI</a>{% endif %}
+              {% if p.arxiv %}<a class="lnk" href="{{ p.arxiv }}">arXiv</a>{% endif %}
+              {% if p.preprint %}<a class="lnk" href="{{ p.preprint }}">Preprint</a>{% endif %}
               {% if p.pdf %}<a class="lnk" href="{{ p.pdf }}">PDF</a>{% endif %}
               {% if p.code %}<a class="lnk" href="{{ p.code }}">Code</a>{% endif %}
               <button class="lnk" type="button" data-copy="{{ p.bibtex }}" data-done="BibTeX copied">BibTeX</button>
@@ -163,6 +164,7 @@
         </div></div>
         {% endfor %}
       </div>
+      {% endfor %}
     </div>
   </section>
 
@@ -181,6 +183,13 @@
       <div class="about">
         <div class="about-copy reveal">
           {% for para in profile.about_html %}<p>{{ para|safe }}</p>{% endfor %}
+          <div class="eyebrow tl-label service-label">Peer review</div>
+          <dl class="service">
+            <dt>Journals</dt>
+            <dd>{{ profile.reviewing.journals|join(" · ") }}</dd>
+            <dt>Conferences</dt>
+            <dd>{{ profile.reviewing.conferences|join(" · ") }}</dd>
+          </dl>
         </div>
         <div class="reveal" style="--rd:.1s">
           <p class="eyebrow tl-label">Experience</p>

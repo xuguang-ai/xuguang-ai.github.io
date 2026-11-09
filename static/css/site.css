@@ -266,8 +266,6 @@ h1.statement {
 .sel-row:hover::before { opacity: 1; }
 .sel-meta { font: 500 12px/1.6 var(--font-mono); letter-spacing: .05em; text-transform: uppercase; color: var(--text-3); }
 .sel-meta .venue { display: block; color: var(--text); }
-.role { display: inline-block; margin-top: 12px; padding: 3px 9px; border: 1px solid var(--line-2); border-radius: 999px; font-size: 10.5px; }
-.role.first { border-color: color-mix(in srgb, var(--accent) 60%, transparent); color: var(--accent-ink); }
 .sel-title { margin: 0; font-size: clamp(1.25rem, 2.2vw, 1.62rem); font-weight: 550; line-height: 1.25; letter-spacing: -.025em; }
 .sel-title a { transition: color .2s; }
 .sel-title a:hover { color: var(--accent-ink); }
@@ -303,8 +301,10 @@ h1.statement {
 .lang i { width: 8px; height: 8px; border-radius: 50%; background: var(--text-3); }
 
 /* ---------- Publications ---------- */
+.pub-group + .pub-group { margin-top: 64px; }
+.pub-group-title { margin: 0 0 6px; font-size: 22px; font-weight: 600; letter-spacing: -.02em; }
 .pub-year { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 36px; padding: 30px 0; border-top: 1px solid var(--line); }
-.pub-year > h3 { position: sticky; top: 92px; align-self: start; margin: 0; font: 500 14px/1.4 var(--font-mono); color: var(--text-3); }
+.pub-year-label { position: sticky; top: 92px; align-self: start; margin: 0; font: 500 14px/1.4 var(--font-mono); color: var(--text-3); }
 .pub { padding-bottom: 24px; }
 .pub + .pub { padding-top: 24px; border-top: 1px dashed var(--line); }
 .pub:last-child { padding-bottom: 0; }
@@ -312,14 +312,7 @@ h1.statement {
 .pub-title a { transition: color .2s; }
 .pub-title a:hover { color: var(--accent-ink); }
 .pub-authors { margin-top: 7px; font-size: 14.5px; color: var(--text-2); }
-.pub-authors b.me, .all-authors b.me { color: var(--text); font-weight: 600; box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--accent) 70%, transparent); }
-.all-authors { margin-top: 4px; font-size: 13.5px; color: var(--text-2); }
-.all-authors summary { width: max-content; cursor: pointer; font: 500 11.5px/1.6 var(--font-mono); color: var(--text-3); list-style: none; }
-.all-authors summary::-webkit-details-marker { display: none; }
-.all-authors summary::before { content: "+ "; }
-.all-authors[open] summary::before { content: "\2212  "; }
-.all-authors summary:hover { color: var(--text); }
-.all-authors p { margin: 6px 0 0; line-height: 1.6; }
+.pub-authors b.me { color: var(--text); font-weight: 600; box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--accent) 70%, transparent); }
 .pub-venue { margin-top: 3px; font-size: 14.5px; color: var(--text-3); }
 .pub .links { margin-top: 12px; }
 
@@ -334,6 +327,11 @@ h1.statement {
 .timeline li:last-child { padding-bottom: 0; }
 .timeline li::before { content: ""; position: absolute; top: 7px; left: -4px; width: 7px; height: 7px; border: 1px solid var(--line-3); border-radius: 50%; background: var(--bg); }
 .timeline li.now::before { border-color: var(--accent); background: var(--accent); box-shadow: 0 0 10px var(--accent-glow); }
+.service-label { margin-top: 44px; }
+.service { margin: 0; }
+.service dt { font-weight: 500; line-height: 1.4; }
+.service dd { margin: 4px 0 18px; font-size: 15.5px; line-height: 1.65; color: var(--text-2); }
+.service dd:last-child { margin-bottom: 0; }
 .when { font: 500 11.5px/1.5 var(--font-mono); letter-spacing: .05em; color: var(--text-3); }
 .what { font-weight: 500; line-height: 1.4; }
 .where { font-size: 14.5px; color: var(--text-2); }
@@ -384,7 +382,7 @@ h1.statement {
   .section { padding: 76px 0; }
   .section-head { margin-bottom: 36px; }
   .pub-year { grid-template-columns: minmax(0, 1fr); gap: 14px; }
-  .pub-year > h3 { position: static; }
+  .pub-year-label { position: static; }
   .sel-row::before { inset: 0 -16px; }
   .rbody { padding: 20px 18px 16px; }
   .ocard { padding: 22px 18px; }

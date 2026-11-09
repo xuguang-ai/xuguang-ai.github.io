@@ -6,13 +6,13 @@ Source of [xuguang-ai.github.io](https://xuguang-ai.github.io): one page built b
 
 | To change | Edit |
 | --- | --- |
-| Headline, about text, timeline, links, the "Latest" pill | `content/profile.yml` |
+| Headline, about text, timeline, peer-review venues, links, the "Latest" pill | `content/profile.yml` |
 | Research directions and their representative work | `content/research.yml` |
 | Selected research (which papers, short titles, takeaways) | `content/selected.yml` |
 | Open-source projects | `content/software.yml` |
 | Publications | `content/papers.bib` |
 
-Add a paper by pasting its BibTeX into `content/papers.bib` with the publisher's full author list and a `doi`. Optional fields: `abbr` (short venue label), `pdf` (a link checked to return a PDF), `code`, `note`. Papers are grouped by year in file order, newest first. The site owner's name is highlighted automatically.
+Add a paper by pasting its BibTeX into `content/papers.bib` with the publisher's full author list and a `doi` (or a `url` for preprints). Peer-reviewed papers are `@article` or `@inproceedings`; preprints are `@misc` with `howpublished` (e.g. `arXiv:2607.07673`). Site-only fields: `abbr` (short venue label), `equal` (the first N authors contributed equally; they get an asterisk), `kind={abstract}` for conference abstracts, `pdf` (a link checked to return a PDF), `code`, `preprint` (public preprint of an accepted paper), `note` (e.g. `Accepted`). Each group is listed by year, newest first, in file order within a year. Author lists show everyone up to the site owner (at least three names), then "et al."; the owner's name is highlighted.
 
 To offer a CV download, put the PDF in `static/` and set `cv_pdf` in `content/profile.yml`.
 
@@ -33,3 +33,7 @@ Then open <http://localhost:8000>. The checks fail on in-page links to missing i
 - `static/`: `css/site.css` (light theme by default, dark after the visitor toggles it), `js/site.js`, images, favicon.
 - `assets/img/my_profile.jpeg`: the original portrait; `static/img/portrait*.jpg` are resized copies.
 - `.github/workflows/deploy.yml`: builds on every push and pull request, and deploys `main` to GitHub Pages.
+
+## License
+
+The code is under the MIT License (see `LICENSE`). The portrait and the written content of the site are © Xuguang Ai and are not covered by that license.

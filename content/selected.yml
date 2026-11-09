@@ -1,6 +1,13 @@
-# Selected research, in display order. `key` points to papers.bib; venue, year, links and the author role
-# (first, second or co-author) come from the entry. `title` is a short display title; `takeaway` must stay
+# Selected research, in display order. `key` points to papers.bib; venue, year and links come from the
+# entry. `title` is a short display title; `takeaway` must stay
 # faithful to the paper's abstract.
+- key: kim2026leme
+  title: "LEME: open large language models for ophthalmology with advanced reasoning and clinical validation"
+  takeaway: >-
+    Open-weight ophthalmology LLMs trained on 211,149 curated examples and refined with preference-based
+    reinforcement learning; they beat all seven baselines, and attending clinicians rated their answers to
+    patient queries highest.
+
 - key: jin2025agentmd
   title: "AgentMD: language agents for risk prediction with large-scale clinical tool learning"
   takeaway: >-
