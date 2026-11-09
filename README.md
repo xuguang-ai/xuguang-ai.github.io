@@ -30,7 +30,7 @@ Then open <http://localhost:8000>. The checks fail on in-page links to missing i
 
 - `build.py`: reads `content/`, renders `templates/` with Jinja2, copies `static/`, and writes `_site/` (index, 404, redirects from the old `/publications/`, `/cv/`, `/repositories/` and `/news/` pages, sitemap, robots.txt).
 - `templates/`: page templates; `partials/visuals.html` holds the three animated research illustrations.
-- `static/`: `css/site.css` (light theme by default, dark after the visitor toggles it), `js/site.js`, images, favicon.
+- `static/`: `css/site.css` (one light theme), `js/site.js`, images, favicon.
 - `assets/img/my_profile.jpeg`: the original portrait; `static/img/portrait*.jpg` are resized copies.
 - `.github/workflows/deploy.yml`: builds on every push and pull request, and deploys `main` to GitHub Pages.
 

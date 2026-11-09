@@ -1,6 +1,6 @@
 <header class="nav" id="top">
   <div class="container nav-inner">
-    <a class="brand" href="/" aria-label="{{ profile.name }}, home"><span class="brand-mark">{{ profile.initials }}</span>{{ profile.name }}</a>
+    <a class="brand" href="/">{{ profile.name }}</a>
     <nav class="nav-links" aria-label="Primary">
       <a class="sm-hide" href="/#research">Research</a>
       <a class="sm-hide" href="/#open-source">Open source</a>
@@ -10,10 +10,6 @@
       {% else %}
       <a class="nav-cv" href="/#about">About</a>
       {% endif %}
-      <button class="icon-btn" id="theme-btn" type="button" aria-label="Switch between light and dark theme">
-        <svg class="i-sun"><use href="#i-sun"/></svg>
-        <svg class="i-moon"><use href="#i-moon"/></svg>
-      </button>
     </nav>
   </div>
 </header>

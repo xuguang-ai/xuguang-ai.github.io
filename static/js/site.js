@@ -1,16 +1,7 @@
 // Small enhancements; the page works without them.
 (function () {
-  var root = document.documentElement;
-
-  // Theme toggle: light by default, the visitor's choice is remembered.
-  var themeBtn = document.getElementById("theme-btn");
-  if (themeBtn) {
-    themeBtn.addEventListener("click", function () {
-      var next = root.dataset.theme === "dark" ? "light" : "dark";
-      root.dataset.theme = next;
-      try { localStorage.setItem("theme", next); } catch (e) {}
-    });
-  }
+  // Forget the theme choice saved by the earlier dark-mode toggle (the site now has one theme).
+  try { localStorage.removeItem("theme"); } catch (e) {}
 
   // Nav border once the page scrolls.
   var nav = document.querySelector(".nav");

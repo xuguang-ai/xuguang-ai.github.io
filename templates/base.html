@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,14 +20,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap">
 <link rel="stylesheet" href="{{ asset('css/site.css') }}">
-<script>
-  // Light by default; dark only after the visitor chooses it with the toggle.
-  document.documentElement.classList.add("js");
-  try {
-    var saved = localStorage.getItem("theme");
-    if (saved === "dark" || saved === "light") document.documentElement.dataset.theme = saved;
-  } catch (e) {}
-</script>
+<script>document.documentElement.classList.add("js");</script>
 <script type="application/ld+json">{{ person_jsonld|safe }}</script>
 </head>
 <body>

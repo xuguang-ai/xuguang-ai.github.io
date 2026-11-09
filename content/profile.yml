@@ -20,17 +20,14 @@ cv_pdf:
 
 # One current item shown as a pill above the headline (replaces a news list). Remove it to hide the pill.
 latest:
-  text: 3rd of 23 teams, FinReason Cup 2026 Task 3
-  href: https://github.com/xuguang-ai/finreason-task3-dqc
+  text: LEME published in npj Digital Medicine
+  href: https://doi.org/10.1038/s41746-026-03104-4
 
 headline_html: I build and evaluate AI for <span class="nowrap">real-world</span> health data.
 lede_html: >-
   I'm <strong>Xuguang Ai</strong>, a data scientist at Regenstrief Institute. I extract structured information
   from clinical text, build and evaluate language and multimodal models for medicine, and link where
   patients live to what they are exposed to.
-research_intro: >-
-  Three threads: extracting information from clinical text, building and testing language and multimodal
-  models for medicine, and linking patients to the environments they live in.
 
 about_html:
   - >-
