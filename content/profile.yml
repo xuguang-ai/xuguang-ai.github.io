@@ -21,7 +21,7 @@ cv_pdf:
 # One current item shown as a pill above the headline (replaces a news list). Remove it to hide the pill.
 latest:
   text: 3rd of 23 teams, FinReason Cup 2026 Task 3
-  href: "#open-source"
+  href: https://github.com/xuguang-ai/finreason-task3-dqc
 
 headline_html: I build and evaluate AI for <span class="nowrap">real-world</span> health data.
 lede_html: >-
@@ -68,7 +68,8 @@ education:
     what: B.S. Physics
     where: Shandong University
 
-# Venues the owner has reviewed for (names only; never manuscript details).
+# Venues the owner has reviewed for (names only; never manuscript details). Shown in the Peer review section.
+reviewing_intro: Journals and conferences I have reviewed for.
 reviewing:
   journals:
     - JAMA Ophthalmology

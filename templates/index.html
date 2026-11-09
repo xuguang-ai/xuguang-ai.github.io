@@ -120,7 +120,6 @@
           {% if s.install %}
           <div class="term above"><span><span class="prompt">$</span>{{ s.install }}</span><button class="copy" type="button" data-copy="{{ s.install }}">Copy</button></div>
           {% endif %}
-          {% if s.stat %}<p class="stat">{{ s.stat }}</p>{% endif %}
           <div class="ocard-foot">
             {% for l in s.lang_items %}<span class="lang"><i{% if l.color %} style="background:{{ l.color }}"{% endif %}></i>{{ l.name }}</span>{% endfor %}
             {% for link in s.links|default([]) %}<a class="lnk above" href="{{ link.href }}">{{ link.label }}<svg class="ico"><use href="#i-arrow"/></svg></a>{% endfor %}
@@ -144,27 +143,48 @@
       {% for g in pub_groups %}
       <div class="pub-group">
         <h3 class="pub-group-title reveal">{{ g.title }}</h3>
-        {% for y in g.years %}
-        <div class="pub-year reveal"><h4 class="pub-year-label">{{ y.year }}</h4><div>
-          {% for p in y.papers %}
-          <article class="pub">
-            <h5 class="pub-title"><a href="{{ p.url }}">{{ p.title }}</a></h5>
-            <div class="pub-authors">{{ p.authors_html|safe }}</div>
-            <div class="pub-venue">{{ p.venue_html|safe }}, {{ p.year }}</div>
+        <div class="sel">
+          {% for p in g.papers %}
+          <article class="sel-row reveal">
+            <div class="sel-meta"><span class="venue">{{ p.venue_name }}</span>{{ p.year }}{% if p.status %} · {{ p.status }}{% endif %}</div>
+            <div>
+              <h4 class="sel-title"><a href="{{ p.url }}">{{ p.title }}</a></h4>
+              <p class="sel-take pub-authors">{{ p.authors_html|safe }}</p>
+            </div>
             <div class="links">
-              {% if p.doi %}<a class="lnk" href="https://doi.org/{{ p.doi }}">DOI</a>{% endif %}
-              {% if p.arxiv %}<a class="lnk" href="{{ p.arxiv }}">arXiv</a>{% endif %}
-              {% if p.preprint %}<a class="lnk" href="{{ p.preprint }}">Preprint</a>{% endif %}
+              <a class="lnk" href="{{ p.url }}">{{ p.main_label }}<svg class="ico"><use href="#i-arrow"/></svg></a>
               {% if p.pdf %}<a class="lnk" href="{{ p.pdf }}">PDF</a>{% endif %}
               {% if p.code %}<a class="lnk" href="{{ p.code }}">Code</a>{% endif %}
-              <button class="lnk" type="button" data-copy="{{ p.bibtex }}" data-done="BibTeX copied">BibTeX</button>
+              <button class="lnk" type="button" data-copy="{{ p.bibtex }}" data-done="Copied">BibTeX</button>
             </div>
           </article>
           {% endfor %}
-        </div></div>
-        {% endfor %}
+        </div>
       </div>
       {% endfor %}
+    </div>
+  </section>
+
+  <!-- Peer review -->
+  <section class="section" id="peer-review">
+    <div class="container">
+      <div class="section-head">
+        <div class="reveal">
+          <p class="eyebrow"><span class="idx">05</span> Peer review</p>
+          <h2>Peer review</h2>
+        </div>
+        <p class="section-sub reveal" style="--rd:.1s">{{ profile.reviewing_intro }}</p>
+      </div>
+      <div class="review-grid">
+        {% for label, venues in [("Journals", profile.reviewing.journals), ("Conferences", profile.reviewing.conferences)] %}
+        <div class="card review-card reveal" style="--rd:{{ loop.index0 * 0.08 }}s" data-spotlight>
+          <div class="rmeta"><span class="idx">{{ label }}</span><span>{{ venues|length }}</span></div>
+          <ul class="review-list">
+            {% for v in venues %}<li>{{ v }}</li>{% endfor %}
+          </ul>
+        </div>
+        {% endfor %}
+      </div>
     </div>
   </section>
 
@@ -173,7 +193,7 @@
     <div class="container">
       <div class="section-head">
         <div class="reveal">
-          <p class="eyebrow"><span class="idx">05</span> About</p>
+          <p class="eyebrow"><span class="idx">06</span> About</p>
           <h2>About</h2>
         </div>
         {% if profile.cv_pdf %}
@@ -183,25 +203,18 @@
       <div class="about">
         <div class="about-copy reveal">
           {% for para in profile.about_html %}<p>{{ para|safe }}</p>{% endfor %}
-          <div class="eyebrow tl-label service-label">Peer review</div>
-          <dl class="service">
-            <dt>Journals</dt>
-            <dd>{{ profile.reviewing.journals|join(" · ") }}</dd>
-            <dt>Conferences</dt>
-            <dd>{{ profile.reviewing.conferences|join(" · ") }}</dd>
-          </dl>
-        </div>
-        <div class="reveal" style="--rd:.1s">
-          <p class="eyebrow tl-label">Experience</p>
-          <ol class="timeline">
-            {% for e in profile.experience %}
-            <li{% if e.get("current") %} class="now"{% endif %}><div class="when">{{ e.when }}</div><div class="what">{{ e.what }}</div><div class="where">{{ e.where }}</div></li>
-            {% endfor %}
-          </ol>
-          <p class="eyebrow tl-label">Education</p>
+          <div class="eyebrow tl-label edu-label">Education</div>
           <ol class="timeline">
             {% for e in profile.education %}
             <li><div class="when">{{ e.when }}</div><div class="what">{{ e.what }}</div><div class="where">{{ e.where }}</div></li>
+            {% endfor %}
+          </ol>
+        </div>
+        <div class="reveal" style="--rd:.1s">
+          <div class="eyebrow tl-label">Experience</div>
+          <ol class="timeline">
+            {% for e in profile.experience %}
+            <li{% if e.get("current") %} class="now"{% endif %}><div class="when">{{ e.when }}</div><div class="what">{{ e.what }}</div><div class="where">{{ e.where }}</div></li>
             {% endfor %}
           </ol>
         </div>
@@ -213,7 +226,7 @@
   <section class="contact" id="contact">
     <div class="glow" aria-hidden="true"></div>
     <div class="container">
-      <p class="eyebrow reveal"><span class="idx">06</span> Contact</p>
+      <p class="eyebrow reveal"><span class="idx">07</span> Contact</p>
       <h2 class="reveal" style="--rd:.06s">{{ profile.contact.heading }}</h2>
       <p class="reveal" style="--rd:.12s">{{ profile.contact.text }}</p>
       <div class="cta-row reveal" style="--rd:.18s">

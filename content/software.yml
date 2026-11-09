@@ -1,4 +1,5 @@
-# Open-source projects, in display order. `install` shows a copyable command; `stat` a one-line result.
+# Open-source projects, in display order. `install` shows a copyable command. With an odd number of
+# projects the first card spans the full width.
 - name: SPACESCANS
   repo: IU-Ultraman/spacescans
   href: https://github.com/IU-Ultraman/spacescans
@@ -13,15 +14,6 @@
       href: https://pypi.org/project/spacescans/
     - label: spacescans.com
       href: https://spacescans.com
-
-- name: FinReason Task 3
-  repo: xuguang-ai/finreason-task3-dqc
-  href: https://github.com/xuguang-ai/finreason-task3-dqc
-  description: >-
-    Exact reproduction of the XBRL US Data Quality Committee rule findings behind FinReason Cup 2026 Task 3,
-    with no language model in the loop.
-  stat: 97.50% on the hidden test set · 3rd of 23 teams
-  langs: [Python]
 
 - name: End-to-end ChemProt
   repo: xuguang-ai/end-to-end-ChemProt

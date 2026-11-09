@@ -100,33 +100,7 @@ def author_line(authors: list[tuple[str, str]], owner: int, equal: int) -> str:
     n = len(authors)
     shown = n if n <= ALL_AUTHORS_UP_TO else max(3, owner + 1)
     line = ", ".join(name(i) for i in range(shown))
-    return line + (", et al." if shown < n else "")
-
-
-def venue_html(f: dict, kind: str) -> str:
-    """Journal or proceedings with volume, issue and pages, e.g. 'JAMA Ophthalmology 143(9):740–748'."""
-    if kind == "misc":
-        out = html.escape(tex(f.get("howpublished", "Preprint")))
-    elif kind == "article":
-        out = f"<i>{html.escape(tex(f['journal']))}</i>"
-        if f.get("volume"):
-            out += f" {html.escape(f['volume'])}"
-            if f.get("number"):
-                out += f"({html.escape(f['number'])})"
-            if f.get("pages"):
-                out += f":{html.escape(tex(f['pages']))}"
-        elif f.get("pages"):
-            out += f", {html.escape(tex(f['pages']))}"
-    else:
-        out = f"<i>{html.escape(tex(f['booktitle']))}</i>"
-        if f.get("series"):
-            out += f", {html.escape(f['series'])} {html.escape(f.get('volume', ''))}".rstrip()
-            out += f":{html.escape(tex(f['pages']))}" if f.get("pages") else ""
-        elif f.get("pages"):
-            out += f", {html.escape(tex(f['pages']))}"
-    if f.get("note"):
-        out += f" ({html.escape(tex(f['note']))})"
-    return out
+    return line + (", et al." if shown < n else "")
 
 
 def bibtex_text(entry: dict) -> str:
@@ -149,8 +123,10 @@ def load_papers() -> list[dict]:
         equal = int(f.get("equal", 0))
         doi_url = f"https://doi.org/{f['doi']}" if f.get("doi") else None
         group = "preprint" if kind == "misc" else f.get("kind", "journal" if kind == "article" else "conference")
-        venue_name = {"article": tex(f.get("journal", "")), "misc": tex(f.get("howpublished", "Preprint"))}.get(
-            kind, f.get("abbr", tex(f.get("booktitle", ""))))
+        # Short venue label for the left column: an explicit `venue`, else the journal, else `abbr`.
+        venue_name = tex(f.get("venue") or (f.get("journal") if kind == "article" else None)
+                         or f.get("abbr") or f.get("booktitle") or f.get("howpublished", "Preprint"))
+        status = "Accepted" if f.get("note") == "Accepted" else ("Abstract" if group == "abstract" else "")
         papers.append({
             "key": entry["key"],
             "kind": kind,
@@ -159,10 +135,10 @@ def load_papers() -> list[dict]:
             "year": f["year"],
             "abbr": f.get("abbr", ""),
             "venue_name": venue_name,
-            "venue_html": venue_html(f, kind),
+            "status": status,
             "doi": f.get("doi"),
             "url": doi_url or f.get("url") or f.get("preprint"),
-            "arxiv": f.get("url") if "arxiv.org" in f.get("url", "") else None,
+            "main_label": "Paper" if (doi_url or f.get("url")) else "Preprint",
             "preprint": f.get("preprint"),
             "pdf": f.get("pdf"),
             "code": f.get("code"),
@@ -175,12 +151,9 @@ def load_papers() -> list[dict]:
     return papers
 
 
-def by_year(papers: list[dict]) -> list[dict]:
-    """Group papers by year, newest year first, keeping file order within a year."""
-    years: dict[str, list[dict]] = {}
-    for p in papers:
-        years.setdefault(p["year"], []).append(p)
-    return [{"year": y, "papers": years[y]} for y in sorted(years, reverse=True)]
+def newest_first(papers: list[dict]) -> list[dict]:
+    """Newest year first; file order within a year (sorted() is stable)."""
+    return sorted(papers, key=lambda p: p["year"], reverse=True)
 
 
 # ---------------------------------------------------------------- Build
@@ -214,15 +187,14 @@ def build() -> dict:
 
     software = load_yaml("software.yml")
     for project in software:
-        for optional in ("install", "stat"):
-            project.setdefault(optional, None)
+        project.setdefault("install", None)
         project.setdefault("links", [])
         project["lang_items"] = [{"name": n, "color": LANG_COLORS.get(n)} for n in project.get("langs", [])]
 
     reviewed = [p for p in papers if p["group"] != "preprint"]
     preprints = [p for p in papers if p["group"] == "preprint"]
-    pub_groups = [{"title": "Peer-reviewed", "years": by_year(reviewed)},
-                  {"title": "Preprints", "years": by_year(preprints)}]
+    pub_groups = [{"title": "Peer-reviewed", "papers": newest_first(reviewed)},
+                  {"title": "Preprints", "papers": newest_first(preprints)}]
 
     person = {
         "@context": "https://schema.org", "@type": "Person", "name": profile["name"], "url": SITE_URL + "/",
