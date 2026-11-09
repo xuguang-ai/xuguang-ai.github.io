@@ -38,161 +38,12 @@
     </div>
   </section>
 
-  <!-- Research directions -->
-  <section class="section" id="research">
-    <div class="container">
-      <div class="section-head">
-        <div class="reveal">
-          <p class="eyebrow"><span class="idx">01</span> Research</p>
-          <h2>Research directions</h2>
-        </div>
-      </div>
-      <div class="rcards">
-        {% for d in research %}
-        <article class="card rcard reveal" style="--rd:{{ loop.index0 * 0.08 }}s" data-spotlight>
-          {{ visual(d.visual) }}
-          <div class="rbody">
-            <div class="rmeta"><span class="idx">{{ d.index }}</span><span>{{ d.label }}</span></div>
-            <h3>{{ d.title }}</h3>
-            <p>{{ d.summary }}</p>
-            <ul class="tags">{% for t in d.tags %}<li>{{ t }}</li>{% endfor %}</ul>
-            <button class="rtoggle" type="button" aria-expanded="false" aria-controls="work-{{ d.index }}">Representative work <span class="plus" aria-hidden="true"></span></button>
-            <div class="rmore" id="work-{{ d.index }}"><div>
-              <ul class="work">
-                {% for w in d.work %}
-                <li><a href="{{ w.href }}">{{ w.title }}</a><span>{{ w.venue }}</span></li>
-                {% endfor %}
-              </ul>
-            </div></div>
-          </div>
-        </article>
-        {% endfor %}
-      </div>
-    </div>
-  </section>
-
-  <!-- Selected research -->
-  <section class="section" id="selected">
-    <div class="container">
-      <div class="section-head">
-        <div class="reveal">
-          <p class="eyebrow"><span class="idx">02</span> Selected research</p>
-          <h2>Selected research</h2>
-        </div>
-        <p class="section-sub reveal" style="--rd:.1s">{{ selected|length }} papers that show the range of the work. The full list is <a href="#publications">below</a>.</p>
-      </div>
-      <div class="sel">
-        {% for p in selected %}
-        <article class="sel-row reveal">
-          <div class="sel-meta"><span class="venue">{{ p.venue_name }}</span>{{ p.year }}</div>
-          <div>
-            <h3 class="sel-title"><a href="{{ p.url }}">{{ p.short_title }}</a></h3>
-            <p class="sel-take">{{ p.takeaway }}</p>
-          </div>
-          <div class="links">
-            <a class="lnk" href="{{ p.url }}">Paper<svg class="ico"><use href="#i-arrow"/></svg></a>
-            {% if p.pdf %}<a class="lnk" href="{{ p.pdf }}">PDF</a>{% endif %}
-            {% if p.code %}<a class="lnk" href="{{ p.code }}">Code</a>{% endif %}
-          </div>
-        </article>
-        {% endfor %}
-      </div>
-    </div>
-  </section>
-
-  <!-- Open source -->
-  <section class="section" id="open-source">
-    <div class="container">
-      <div class="section-head">
-        <div class="reveal">
-          <p class="eyebrow"><span class="idx">03</span> Open source</p>
-          <h2>Open source</h2>
-        </div>
-        <p class="section-sub reveal" style="--rd:.1s">Software I build and maintain, from research packages to small tools. More on <a href="{{ profile.links.github }}">GitHub</a>.</p>
-      </div>
-      <div class="oss">
-        {% for s in software %}
-        <article class="card ocard reveal" style="--rd:{{ (loop.index0 % 2) * 0.08 }}s" data-spotlight>
-          <div class="ocard-head"><span>{{ s.repo }}</span><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></div>
-          <h3><a class="stretched" href="{{ s.href }}">{{ s.name }}</a></h3>
-          <p>{{ s.description }}</p>
-          {% if s.install %}
-          <div class="term above"><span><span class="prompt">$</span>{{ s.install }}</span><button class="copy" type="button" data-copy="{{ s.install }}">Copy</button></div>
-          {% endif %}
-          <div class="ocard-foot">
-            {% for l in s.lang_items %}<span class="lang"><i{% if l.color %} style="background:{{ l.color }}"{% endif %}></i>{{ l.name }}</span>{% endfor %}
-            {% for link in s.links|default([]) %}<a class="lnk above" href="{{ link.href }}">{{ link.label }}<svg class="ico"><use href="#i-arrow"/></svg></a>{% endfor %}
-          </div>
-        </article>
-        {% endfor %}
-      </div>
-    </div>
-  </section>
-
-  <!-- Publications -->
-  <section class="section" id="publications">
-    <div class="container">
-      <div class="section-head">
-        <div class="reveal">
-          <p class="eyebrow"><span class="idx">04</span> Publications</p>
-          <h2>Publications</h2>
-        </div>
-        <p class="section-sub reveal" style="--rd:.1s">{{ n_reviewed }} peer-reviewed papers and {{ n_preprints }} preprints, newest first.{% if has_equal %} *&nbsp;marks equal contribution.{% endif %} Also on <a href="{{ profile.links.scholar }}">Google Scholar</a>.</p>
-      </div>
-      {% for g in pub_groups %}
-      <div class="pub-group">
-        <h3 class="pub-group-title reveal">{{ g.title }}</h3>
-        <div class="sel">
-          {% for p in g.papers %}
-          <article class="sel-row reveal">
-            <div class="sel-meta"><span class="venue">{{ p.venue_name }}</span>{{ p.year }}{% if p.status %} · {{ p.status }}{% endif %}</div>
-            <div>
-              <h4 class="sel-title"><a href="{{ p.url }}">{{ p.title }}</a></h4>
-              <p class="sel-take pub-authors">{{ p.authors_html|safe }}</p>
-            </div>
-            <div class="links">
-              <a class="lnk" href="{{ p.url }}">{{ p.main_label }}<svg class="ico"><use href="#i-arrow"/></svg></a>
-              {% if p.pdf %}<a class="lnk" href="{{ p.pdf }}">PDF</a>{% endif %}
-              {% if p.code %}<a class="lnk" href="{{ p.code }}">Code</a>{% endif %}
-              <button class="lnk" type="button" data-copy="{{ p.bibtex }}" data-done="Copied">BibTeX</button>
-            </div>
-          </article>
-          {% endfor %}
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-  </section>
-
-  <!-- Peer review -->
-  <section class="section" id="peer-review">
-    <div class="container">
-      <div class="section-head">
-        <div class="reveal">
-          <p class="eyebrow"><span class="idx">05</span> Peer review</p>
-          <h2>Peer review</h2>
-        </div>
-        <p class="section-sub reveal" style="--rd:.1s">{{ profile.reviewing_intro }}</p>
-      </div>
-      <div class="review-grid">
-        {% for label, venues in [("Journals", profile.reviewing.journals), ("Conferences", profile.reviewing.conferences)] %}
-        <div class="card review-card reveal" style="--rd:{{ loop.index0 * 0.08 }}s" data-spotlight>
-          <div class="rmeta"><span class="idx">{{ label }}</span><span>{{ venues|length }}</span></div>
-          <ul class="review-list">
-            {% for v in venues %}<li>{{ v }}</li>{% endfor %}
-          </ul>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-  </section>
-
   <!-- About -->
   <section class="section" id="about">
     <div class="container">
       <div class="section-head">
         <div class="reveal">
-          <p class="eyebrow"><span class="idx">06</span> About</p>
+          <p class="eyebrow"><span class="idx">01</span> About</p>
           <h2>About</h2>
         </div>
         {% if profile.cv_pdf %}
@@ -221,11 +72,135 @@
     </div>
   </section>
 
+  <!-- Research directions -->
+  <section class="section" id="research">
+    <div class="container">
+      <div class="section-head">
+        <div class="reveal">
+          <p class="eyebrow"><span class="idx">02</span> Research</p>
+          <h2>Research directions</h2>
+        </div>
+      </div>
+      <div class="rcards">
+        {% for d in research %}
+        <article class="card rcard reveal" style="--rd:{{ loop.index0 * 0.08 }}s" data-spotlight>
+          {{ visual(d.visual) }}
+          <div class="rbody">
+            <div class="rmeta"><span class="idx">{{ d.index }}</span><span>{{ d.label }}</span></div>
+            <h3>{{ d.title }}</h3>
+            <p>{{ d.summary }}</p>
+            <ul class="tags">{% for t in d.tags %}<li>{{ t }}</li>{% endfor %}</ul>
+            <button class="rtoggle" type="button" aria-expanded="false" aria-controls="work-{{ d.index }}">Representative work <span class="plus" aria-hidden="true"></span></button>
+            <div class="rmore" id="work-{{ d.index }}"><div>
+              <ul class="work">
+                {% for w in d.work %}
+                <li><a href="{{ w.href }}">{{ w.title }}</a><span>{{ w.venue }}</span></li>
+                {% endfor %}
+              </ul>
+            </div></div>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Publications -->
+  <section class="section" id="publications">
+    <div class="container">
+      <div class="section-head">
+        <div class="reveal">
+          <p class="eyebrow"><span class="idx">03</span> Publications</p>
+          <h2>Publications</h2>
+        </div>
+      </div>
+      <!-- The first {{ pubs_visible }} rows show by default; the rest stay in the page and are revealed by the button (shown only with JavaScript). -->
+      <div class="pubs is-collapsed" id="pubs-list">
+      {% for g in pub_groups %}
+      <div class="pub-group{% if g.collapsed %} pub-more{% endif %}">
+        <h3 class="pub-group-title reveal">{{ g.title }}</h3>
+        <div class="pub-list">
+          {% for p in g.papers %}
+          <article class="pub-row reveal{% if p.collapsed %} pub-more{% endif %}">
+            <div class="pub-meta"><span class="venue">{{ p.venue_name }}</span>{{ p.year }}{% if p.status %} · {{ p.status }}{% endif %}</div>
+            <div>
+              <h4 class="pub-title"><a href="{{ p.url }}">{{ p.title }}</a></h4>
+              <p class="pub-authors">{{ p.authors_html|safe }}</p>
+            </div>
+            <div class="links">
+              <a class="lnk" href="{{ p.url }}">{{ p.main_label }}<svg class="ico"><use href="#i-arrow"/></svg></a>
+              {% if p.pdf %}<a class="lnk" href="{{ p.pdf }}">PDF</a>{% endif %}
+              {% if p.code %}<a class="lnk" href="{{ p.code }}">Code</a>{% endif %}
+              <button class="lnk" type="button" data-copy="{{ p.bibtex }}" data-done="Copied">BibTeX</button>
+            </div>
+          </article>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+      </div>
+      {% if n_papers > pubs_visible %}
+      <button class="btn btn-ghost pubs-toggle" type="button" aria-expanded="false" aria-controls="pubs-list"
+              data-more="Show all {{ n_papers }} publications" data-less="Show fewer">Show all {{ n_papers }} publications</button>
+      {% endif %}
+    </div>
+  </section>
+
+  <!-- Open source -->
+  <section class="section" id="open-source">
+    <div class="container">
+      <div class="section-head">
+        <div class="reveal">
+          <p class="eyebrow"><span class="idx">04</span> Open source</p>
+          <h2>Open source</h2>
+        </div>
+      </div>
+      <div class="oss">
+        {% for s in software %}
+        <article class="card ocard reveal" style="--rd:{{ (loop.index0 % 2) * 0.08 }}s" data-spotlight>
+          <div class="ocard-head"><span>{{ s.repo }}</span><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></div>
+          <h3><a class="stretched" href="{{ s.href }}">{{ s.name }}</a></h3>
+          <p>{{ s.description }}</p>
+          {% if s.install %}
+          <div class="term above"><span><span class="prompt">$</span>{{ s.install }}</span><button class="copy" type="button" data-copy="{{ s.install }}">Copy</button></div>
+          {% endif %}
+          <div class="ocard-foot">
+            {% for l in s.lang_items %}<span class="lang"><i{% if l.color %} style="background:{{ l.color }}"{% endif %}></i>{{ l.name }}</span>{% endfor %}
+            {% for link in s.links|default([]) %}<a class="lnk above" href="{{ link.href }}">{{ link.label }}<svg class="ico"><use href="#i-arrow"/></svg></a>{% endfor %}
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Peer review -->
+  <section class="section" id="peer-review">
+    <div class="container">
+      <div class="section-head">
+        <div class="reveal">
+          <p class="eyebrow"><span class="idx">05</span> Peer review</p>
+          <h2>Peer review</h2>
+        </div>
+      </div>
+      <div class="review-grid">
+        {% for label, venues in [("Journals", profile.reviewing.journals), ("Conferences", profile.reviewing.conferences)] %}
+        <div class="card review-card reveal" style="--rd:{{ loop.index0 * 0.08 }}s" data-spotlight>
+          <div class="rmeta"><span class="idx">{{ label }}</span><span>{{ venues|length }}</span></div>
+          <ul class="review-list">
+            {% for v in venues %}<li>{{ v }}</li>{% endfor %}
+          </ul>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
   <!-- Contact -->
   <section class="contact" id="contact">
     <div class="glow" aria-hidden="true"></div>
     <div class="container">
-      <p class="eyebrow reveal"><span class="idx">07</span> Contact</p>
+      <p class="eyebrow reveal"><span class="idx">06</span> Contact</p>
       <h2 class="reveal" style="--rd:.06s">{{ profile.contact.heading }}</h2>
       <p class="reveal" style="--rd:.12s">{{ profile.contact.text }}</p>
       <div class="cta-row reveal" style="--rd:.18s">

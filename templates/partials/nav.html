@@ -2,14 +2,11 @@
   <div class="container nav-inner">
     <a class="brand" href="/">{{ profile.name }}</a>
     <nav class="nav-links" aria-label="Primary">
+      <a href="/#about">About</a>
       <a class="sm-hide" href="/#research">Research</a>
-      <a class="sm-hide" href="/#open-source">Open source</a>
       <a class="sm-hide" href="/#publications">Publications</a>
-      {% if profile.cv_pdf %}
-      <a class="nav-cv" href="/static/{{ profile.cv_pdf }}">CV</a>
-      {% else %}
-      <a class="nav-cv" href="/#about">About</a>
-      {% endif %}
+      <a class="sm-hide" href="/#open-source">Open source</a>
+      {% if profile.cv_pdf %}<a class="nav-cv" href="/static/{{ profile.cv_pdf }}">CV</a>{% endif %}
     </nav>
   </div>
 </header>

@@ -8,7 +8,6 @@ Source of [xuguang-ai.github.io](https://xuguang-ai.github.io): one page built b
 | --- | --- |
 | Headline, about text, timeline, peer-review venues, links, the "Latest" pill | `content/profile.yml` |
 | Research directions and their representative work | `content/research.yml` |
-| Selected research (which papers, short titles, takeaways) | `content/selected.yml` |
 | Open-source projects | `content/software.yml` |
 | Publications | `content/papers.bib` |
 

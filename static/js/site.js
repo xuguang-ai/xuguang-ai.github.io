@@ -40,6 +40,19 @@
     });
   });
 
+  // Publications: show the first few, expand to all on request.
+  var pubs = document.getElementById("pubs-list");
+  var pubsToggle = document.querySelector(".pubs-toggle");
+  if (pubs && pubsToggle) {
+    pubsToggle.addEventListener("click", function () {
+      var expand = pubs.classList.contains("is-collapsed");
+      pubs.classList.toggle("is-collapsed", !expand);
+      pubsToggle.setAttribute("aria-expanded", String(expand));
+      pubsToggle.textContent = expand ? pubsToggle.dataset.less : pubsToggle.dataset.more;
+      if (!expand) document.getElementById("publications").scrollIntoView({ block: "start" });
+    });
+  }
+
   // Copy buttons (install command, email, BibTeX).
   document.querySelectorAll("[data-copy]").forEach(function (btn) {
     btn.addEventListener("click", function () {

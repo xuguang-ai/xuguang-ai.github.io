@@ -42,6 +42,7 @@ LANG_COLORS = {"Python": "#3572a5", "R": "#198ce7", "Swift": "#f05138"}
 BIBTEX_FIELDS = ["title", "author", "journal", "booktitle", "series", "volume", "number", "pages",
                  "year", "publisher", "howpublished", "note", "doi", "url"]
 ALL_AUTHORS_UP_TO = 5  # lists with at most this many authors are shown in full
+PUBS_VISIBLE = 6       # publications shown before "Show all"; the rest are in the page but collapsed
 FORBIDDEN = ["Einstein", "al-folio", "example_pdf", "Lorem ipsum", "TODO"]
 
 
@@ -181,9 +182,6 @@ def build() -> dict:
                 item.setdefault("href", paper["url"])
                 item.setdefault("venue", f"{paper['abbr']} {paper['year']}")
 
-    selected = []
-    for item in load_yaml("selected.yml"):
-        selected.append({**by_key[item["key"]], "short_title": item["title"], "takeaway": item["takeaway"]})
 
     software = load_yaml("software.yml")
     for project in software:
@@ -195,6 +193,12 @@ def build() -> dict:
     preprints = [p for p in papers if p["group"] == "preprint"]
     pub_groups = [{"title": "Peer-reviewed", "papers": newest_first(reviewed)},
                   {"title": "Preprints", "papers": newest_first(preprints)}]
+    rank = 0
+    for g in pub_groups:
+        for p in g["papers"]:
+            p["collapsed"] = rank >= PUBS_VISIBLE
+            rank += 1
+        g["collapsed"] = all(p["collapsed"] for p in g["papers"])
 
     person = {
         "@context": "https://schema.org", "@type": "Person", "name": profile["name"], "url": SITE_URL + "/",
@@ -206,9 +210,8 @@ def build() -> dict:
                       undefined=StrictUndefined, trim_blocks=True, lstrip_blocks=True)
     env.globals.update(asset=asset_url, site_url=SITE_URL, year=dt.date.today().year,
                        person_jsonld=json.dumps(person, ensure_ascii=False).replace("</", "<\\/"))
-    ctx = {"profile": profile, "research": research, "selected": selected, "software": software,
-           "pub_groups": pub_groups, "n_reviewed": len(reviewed), "n_preprints": len(preprints),
-           "has_equal": any(p["equal"] for p in papers)}
+    ctx = {"profile": profile, "research": research, "software": software,
+           "pub_groups": pub_groups, "n_papers": len(papers), "pubs_visible": PUBS_VISIBLE}
 
     if OUT.exists():
         shutil.rmtree(OUT)
@@ -225,7 +228,7 @@ def build() -> dict:
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         f"  <url><loc>{SITE_URL}/</loc><lastmod>{dt.date.today().isoformat()}</lastmod></url>\n"
         "</urlset>\n", encoding="utf-8")
-    return {"papers": papers, "selected": selected}
+    return {"papers": papers}
 
 
 # ---------------------------------------------------------------- Checks
@@ -292,7 +295,7 @@ def main() -> int:
     ap.add_argument("--check", action="store_true", help="run consistency checks after building")
     args = ap.parse_args()
     result = build()
-    print(f"built {OUT.relative_to(ROOT)}/: {len(result['papers'])} papers, {len(result['selected'])} selected")
+    print(f"built {OUT.relative_to(ROOT)}/: {len(result['papers'])} papers")
     if args.check:
         problems = check(result)
         for p in problems:
