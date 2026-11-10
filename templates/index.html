@@ -128,7 +128,7 @@
       <div class="pubs pub-list is-collapsed" id="pubs-list">
         {% for p in papers %}
         <article class="pub-row reveal{% if p.collapsed %} pub-more{% endif %}">
-          <div class="pub-meta"><span class="venue">{{ p.venue_name }}</span>{{ p.year }}{% if p.status %} · {{ p.status }}{% endif %}</div>
+          <div class="pub-meta"><span class="venue">{{ p.venue_name }}</span>{{ p.when }}</div>
           <div>
             <h3 class="pub-title"><a href="{{ p.url }}">{{ p.title }}</a></h3>
             <p class="pub-authors">{{ p.authors_html|safe }}</p>

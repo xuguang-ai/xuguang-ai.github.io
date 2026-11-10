@@ -40,6 +40,7 @@ REDIRECTS = {
 
 LANG_COLORS = {"Python": "#3572a5", "R": "#198ce7", "Swift": "#f05138", "TypeScript": "#3178c6"}
 ALL_AUTHORS_UP_TO = 5  # lists with at most this many authors are shown in full
+MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 PUBS_VISIBLE = 6       # publications shown before "Show all"; the rest are in the page but collapsed
 FORBIDDEN = ["Einstein", "al-folio", "example_pdf", "Lorem ipsum", "TODO"]
 
@@ -121,15 +122,17 @@ def load_papers() -> list[dict]:
         # Short venue label for the left column: an explicit `venue`, else the journal, else `abbr`.
         venue_name = tex(f.get("venue") or (f.get("journal") if kind == "article" else None)
                          or f.get("abbr") or f.get("booktitle") or f.get("howpublished", "Preprint"))
-        status = "Accepted" if f.get("note") == "Accepted" else ("Abstract" if f.get("kind") == "abstract" else "")
+        date = f.get("date", f["year"])
+        # "Sep 2026" when the date has a month, else the year alone.
+        when = f"{MONTHS[int(date[5:7]) - 1]} {f['year']}" if len(date) >= 7 else f["year"]
         papers.append({
             "key": entry["key"],
             "title": tex(f["title"]),
             "year": f["year"],
-            "date": f.get("date", f["year"]),
+            "date": date,
+            "when": when,
             "abbr": f.get("abbr", ""),
             "venue_name": venue_name,
-            "status": status,
             "url": doi_url or f.get("url") or f.get("preprint"),
             "link_label": "Paper" if (doi_url or f.get("url")) else "Preprint",
             "owner_position": owner + 1,
