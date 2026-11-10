@@ -28,5 +28,8 @@
 {% include "partials/nav.html" %}
 {% block content %}{% endblock %}
 <script src="{{ asset('js/site.js') }}" defer></script>
+{% if profile.get("goatcounter") %}
+<script data-goatcounter="https://{{ profile.goatcounter }}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+{% endif %}
 </body>
 </html>

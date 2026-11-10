@@ -17,6 +17,8 @@ The publication list has a filter row, one button per research interest that has
 
 To offer a CV download, put the PDF in `static/` and set `cv_pdf` in `content/profile.yml`.
 
+Visitor statistics come from [GoatCounter](https://www.goatcounter.com), which sets no cookies: `goatcounter` in `content/profile.yml` is the account name, and the numbers are at `https://<name>.goatcounter.com`. To stop counting your own visits, open the site once with `#toggle-goatcounter` at the end of the address in each browser you use (open it again to undo). Previews on localhost are never counted.
+
 ## Build and preview
 
 ```bash

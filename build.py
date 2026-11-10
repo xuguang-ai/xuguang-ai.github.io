@@ -255,6 +255,9 @@ def check(result: dict) -> list[str]:
             local = OUT / ref.split("?")[0].split("#")[0].lstrip("/")
             if ref.split("#")[0] not in ("/", "") and not local.exists():
                 problems.append(f"missing local file: {ref}")
+    for endpoint in re.findall(r'data-goatcounter="([^"]*)"', page):
+        if not re.fullmatch(r"https://[a-z0-9-]+\.goatcounter\.com/count", endpoint):
+            problems.append(f"GoatCounter endpoint looks wrong: {endpoint}")
     for p in result["papers"]:
         if p["owner_position"] < 1:
             problems.append(f"{p['key']}: the site owner is not among the authors")

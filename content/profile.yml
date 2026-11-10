@@ -19,6 +19,10 @@ links:
 # Path under static/ of a CV PDF. The CV buttons appear only when this is set, e.g. cv_pdf: cv.pdf
 cv_pdf:
 
+# Visitor statistics: the GoatCounter account name (dashboard at https://<name>.goatcounter.com).
+# Leave it empty to turn counting off.
+goatcounter: xuguang-ai
+
 # One current item shown as a pill above the headline (replaces a news list). Remove it to hide the pill.
 latest:
   text: LEME published in npj Digital Medicine
