@@ -96,7 +96,14 @@
         <article class="card rcard reveal" style="--rd:{{ loop.index0 * 0.08 }}s" data-spotlight>
           {{ visual(d.visual) }}
           <div class="rbody">
-            <div class="rmeta"><span class="idx">{{ d.index }}</span><span>{{ d.label }}</span></div>
+            <div class="rmeta">
+              <span class="idx">{{ d.index }}</span>
+              {% if d.n_papers %}
+              <a class="rcount" href="#publications" data-filter="{{ d.id }}">{{ d.n_papers }} papers<svg class="ico" aria-hidden="true"><use href="#i-arrow-down"/></svg></a>
+              {% else %}
+              <a class="rcount" href="#open-source">Software<svg class="ico" aria-hidden="true"><use href="#i-arrow-down"/></svg></a>
+              {% endif %}
+            </div>
             <h3>{{ d.title }}</h3>
             <p>{{ d.summary }}</p>
             <ul class="tags">{% for t in d.tags %}<li>{{ t }}</li>{% endfor %}</ul>
@@ -125,9 +132,15 @@
         </div>
       </div>
       <!-- The first {{ pubs_visible }} rows show by default; the rest stay in the page and are revealed by the button (shown only with JavaScript). -->
+      <div class="pub-filters" role="group" aria-label="Filter publications by research interest">
+        <button class="chip is-active" type="button" data-filter="" aria-pressed="true">All<span>{{ papers|length }}</span></button>
+        {% for d in research if d.n_papers %}
+        <button class="chip" type="button" data-filter="{{ d.id }}" aria-pressed="false">{{ d.short }}<span>{{ d.n_papers }}</span></button>
+        {% endfor %}
+      </div>
       <div class="pubs pub-list is-collapsed" id="pubs-list">
         {% for p in papers %}
-        <article class="pub-row reveal{% if p.collapsed %} pub-more{% endif %}">
+        <article class="pub-row reveal{% if p.collapsed %} pub-more{% endif %}" data-area="{{ p.area }}">
           <div class="pub-meta"><span class="venue">{{ p.venue_name }}</span>{{ p.when }}</div>
           <div>
             <h3 class="pub-title"><a href="{{ p.url }}">{{ p.title }}</a></h3>

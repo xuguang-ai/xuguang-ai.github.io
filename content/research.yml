@@ -1,8 +1,11 @@
-# Research interests, in display order. `visual` picks the animated illustration (ner, multimodal, agent).
-# A work item either cites a paper by its key in papers.bib (link and venue come from the entry)
-# or gives title, href and venue directly.
+# Research interests, in display order. `id` is what papers.bib (`area`) refers to;
+# `short` is its name in the publication filter; `visual` picks the animated
+# illustration (ner, multimodal, agent, eye, exposome).
+# A work item either cites a paper by its key in papers.bib (link and venue come from the entry; the paper
+# must be filed under the same interest) or gives title, href and venue directly.
 - index: "01"
-  label: Text
+  id: nlp
+  short: Clinical NLP
   visual: ner
   title: Biomedical and Clinical NLP
   summary: >-
@@ -22,7 +25,8 @@
       title: Benchmarking LLMs for biomedical NLP
 
 - index: "02"
-  label: Models
+  id: models
+  short: Foundation models
   visual: multimodal
   title: Multimodal and Foundation Models in Medicine
   summary: >-
@@ -40,7 +44,8 @@
       title: Memorization in medical LLMs
 
 - index: "03"
-  label: Agents
+  id: agents
+  short: AI agents
   visual: agent
   title: Healthcare AI Agents
   summary: >-
@@ -56,7 +61,8 @@
       title: "EHRNavigator: multi-agent question answering over EHRs"
 
 - index: "04"
-  label: Vision
+  id: eye
+  short: Ophthalmology
   visual: eye
   title: AI in Ophthalmology
   summary: >-
@@ -77,7 +83,8 @@
       title: Retrieval-augmented LLMs for ophthalmology questions
 
 - index: "05"
-  label: Place
+  id: exposome
+  short: Exposome
   visual: exposome
   title: Exposome for Health
   summary: >-

@@ -40,9 +40,14 @@
     });
   });
 
-  // Publications: show the first few, expand to all on request.
+  // Publications: show the first few, expand to all on request, filter by research interest.
+  var list = function (selector) { return Array.prototype.slice.call(document.querySelectorAll(selector)); };
   var pubs = document.getElementById("pubs-list");
   var pubsToggle = document.querySelector(".pubs-toggle");
+  var pubRows = list("#pubs-list .pub-row");
+  var chips = list(".pub-filters .chip");
+  var activeArea = "";
+
   if (pubs && pubsToggle) {
     pubsToggle.addEventListener("click", function () {
       var expand = pubs.classList.contains("is-collapsed");
@@ -52,6 +57,30 @@
       if (!expand) document.getElementById("publications").scrollIntoView({ block: "start" });
     });
   }
+
+  // One filter state: the chips above the list show it; the "N papers" links on the research cards set it.
+  function setFilter(area) {
+    activeArea = area || "";
+    pubRows.forEach(function (row) { row.classList.toggle("is-out", !!activeArea && row.dataset.area !== activeArea); });
+    if (pubs) pubs.classList.toggle("is-filtering", !!activeArea);
+    chips.forEach(function (chip) {
+      var on = chip.dataset.filter === activeArea;
+      chip.classList.toggle("is-active", on);
+      chip.setAttribute("aria-pressed", String(on));
+    });
+  }
+  chips.forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      setFilter(chip.dataset.filter === activeArea ? "" : chip.dataset.filter);
+    });
+  });
+  list("a[data-filter]").forEach(function (link) {
+    link.addEventListener("click", function (ev) {
+      ev.preventDefault();
+      setFilter(link.dataset.filter);
+      document.getElementById("publications").scrollIntoView({ block: "start" });
+    });
+  });
 
   // Copy buttons (email, BibTeX, install command). The label reports what actually happened.
   function copyText(text) {

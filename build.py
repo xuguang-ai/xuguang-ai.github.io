@@ -132,6 +132,7 @@ def load_papers() -> list[dict]:
             "date": date,
             "when": when,
             "abbr": f.get("abbr", ""),
+            "area": f.get("area", ""),
             "venue_name": venue_name,
             "url": doi_url or f.get("url") or f.get("preprint"),
             "owner_position": owner + 1,
@@ -159,9 +160,11 @@ def build() -> dict:
 
     research = load_yaml("research.yml")
     for direction in research:
+        direction["n_papers"] = sum(1 for p in papers if p["area"] == direction["id"])
         for item in direction["work"]:
             if "key" in item:
                 paper = by_key[item["key"]]
+                item["area"] = paper["area"]
                 item.setdefault("href", paper["url"])
                 item.setdefault("venue", f"{paper['abbr']} {paper['year']}")
 
@@ -202,7 +205,7 @@ def build() -> dict:
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         f"  <url><loc>{SITE_URL}/</loc><lastmod>{dt.date.today().isoformat()}</lastmod></url>\n"
         "</urlset>\n", encoding="utf-8")
-    return {"papers": papers}
+    return {"papers": papers, "research": research}
 
 
 # ---------------------------------------------------------------- Checks
@@ -259,6 +262,16 @@ def check(result: dict) -> list[str]:
             problems.append(f"{p['key']}: no DOI or URL")
         if not p["date"].startswith(p["year"]):
             problems.append(f"{p['key']}: date {p['date']} is not in its year {p['year']}")
+    areas = [d["id"] for d in result["research"]]
+    if len(set(areas)) != len(areas):
+        problems.append("research.yml: interest ids are not unique")
+    for p in result["papers"]:
+        if p["area"] and p["area"] not in areas:
+            problems.append(f"{p['key']}: unknown area '{p['area']}'")
+    for d in result["research"]:
+        for item in d["work"]:
+            if "key" in item and item["area"] != d["id"]:
+                problems.append(f"research '{d['id']}' lists {item['key']}, which is filed under '{item['area']}'")
     for word in FORBIDDEN:
         for f in OUT.rglob("*.html"):
             if word in f.read_text(encoding="utf-8"):
