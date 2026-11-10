@@ -1,17 +1,15 @@
-# Research directions, in display order. `visual` picks the animated illustration (ner, agent, exposome).
+# Research interests, in display order. `visual` picks the animated illustration (ner, multimodal, agent).
 # A work item either cites a paper by its key in papers.bib (link and venue come from the entry)
 # or gives title, href and venue directly.
 - index: "01"
   label: Text
   visual: ner
-  title: Clinical information extraction
+  title: Biomedical and Clinical NLP
   summary: >-
-    Turning clinical notes and biomedical literature into structured data, end to end: entities, relations,
-    eligibility criteria, and chart review over a patient's longitudinal record.
+    Turning clinical notes and biomedical literature into structured data, end to end: entities, relations
+    and eligibility criteria.
   tags: [NER, Relation extraction, Clinical notes]
   work:
-    - key: jiang2026agentic
-      title: Agentic chart review from longitudinal clinical notes
     - key: brokman2025benchmark
       title: Zero-shot biomedical relation extraction with LLMs
     - key: gupta2025comparison
@@ -20,43 +18,43 @@
       title: Eligibility-criteria parsing with LLMs
     - key: ai2023end
       title: End-to-end chemical–protein interaction extraction
+    - key: chen2025benchmarking
+      title: Benchmarking LLMs for biomedical NLP
 
 - index: "02"
   label: Models
-  visual: agent
-  title: Language & multimodal models
+  visual: multimodal
+  title: Multimodal and Foundation Models in Medicine
   summary: >-
-    Open models and benchmarks for medicine, from ophthalmology to dermatology, and agents that use clinical
-    tools.
-  tags: [Benchmarks, Multimodal, Agents]
+    Building and benchmarking open language and multimodal models for medicine, from ophthalmology to
+    dermatology.
+  tags: [Foundation models, Multimodal, Benchmarks]
   work:
     - key: kim2026leme
       title: "LEME: open LLMs for ophthalmology"
-    - key: srinivasan2025ophthalmological
-      title: OpenAI o1 vs other LLMs in ophthalmology
-    - key: srinivasan2025benchmarking
-      title: "BELO: an expert-curated ophthalmology benchmark"
+    - key: qin2026volmo
+      title: "VOLMO: versatile open models for ophthalmology"
     - key: kim2026medpmc
       title: "MedPMC: medical multimodal data for foundation models"
     - key: jiang2026multimodal
       title: Multimodal LLMs in clinical dermatology
-    - key: jin2025agentmd
-      title: "AgentMD: clinical tool learning for risk prediction"
+    - key: srinivasan2025ophthalmological
+      title: OpenAI o1 vs other LLMs in ophthalmology
+    - key: srinivasan2025benchmarking
+      title: "BELO: an expert-curated ophthalmology benchmark"
 
 - index: "03"
-  label: Place
-  visual: exposome
-  title: Real-world data & the exposome
+  label: Agents
+  visual: agent
+  title: Healthcare AI Agents
   summary: >-
-    Linking where people have been to what they were exposed to, and predictive models built on cohort and
-    trial data.
-  tags: [Geospatial linkage, Exposome, OMOP CDM]
+    Language agents that read patient records, use clinical tools and answer questions over electronic
+    health records.
+  tags: [Tool use, Chart review, EHR]
   work:
-    - title: SPACESCANS web application
-      href: https://github.com/IU-Ultraman/spacescans-web
-      venue: GitHub
-    - title: SPACESCANS website
-      href: https://spacescans.com
-      venue: spacescans.com
-    - key: huang2026mo1637
-      title: Early anti-TNF responder prediction in pediatric Crohn's disease
+    - key: jin2025agentmd
+      title: "AgentMD: clinical tool learning for risk prediction"
+    - key: jiang2026agentic
+      title: Agentic chart review from longitudinal clinical notes
+    - key: qian2026ehrnavigator
+      title: "EHRNavigator: multi-agent question answering over EHRs"

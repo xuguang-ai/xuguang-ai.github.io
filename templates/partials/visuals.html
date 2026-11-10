@@ -8,6 +8,18 @@
     <span class="ln"><mark style="--d:2.1s" data-l="DOSE">500 mg BID</mark>; denies <mark style="--d:2.8s" data-l="NEGATED">chest pain</mark>.</span>
   </div>
 </div>
+{% elif kind == "multimodal" %}
+<div class="rviz viz-mm" aria-hidden="true">
+  <svg class="viz-svg" viewBox="0 0 360 172" preserveAspectRatio="xMidYMid meet">
+    <g class="input"><rect x="24" y="26" width="84" height="56" rx="8"/><circle cx="66" cy="54" r="15" class="eye"/><circle cx="66" cy="54" r="5" class="pupil"/></g>
+    <g class="input"><rect x="24" y="96" width="84" height="50" rx="8"/><path class="txt" d="M36 112h60M36 122h46M36 132h54"/></g>
+    <path class="edge" d="M108 54 C136 54 136 86 158 86"/>
+    <path class="edge" d="M108 121 C136 121 136 86 158 86"/>
+    <g class="node core"><rect x="158" y="66" width="108" height="40" rx="10"/><text x="212" y="87">foundation model</text></g>
+    <path class="edge" d="M266 86 H288"/>
+    <g class="node"><rect x="288" y="72" width="52" height="28" rx="8"/><text x="314" y="87">answer</text></g>
+  </svg>
+</div>
 {% elif kind == "agent" %}
 <div class="rviz viz-agent" aria-hidden="true">
   <svg class="viz-svg" viewBox="0 0 360 172" preserveAspectRatio="xMidYMid meet">
