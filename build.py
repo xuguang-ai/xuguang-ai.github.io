@@ -168,7 +168,7 @@ def build() -> dict:
                 item.setdefault("href", paper["url"])
                 item.setdefault("venue", f"{paper['abbr']} {paper['year']}")
 
-    software = load_yaml("software.yml")
+    software = sorted(load_yaml("software.yml"), key=lambda project: str(project.get("date", "")), reverse=True)
     for project in software:
         project.setdefault("install", None)
         project.setdefault("links", [])

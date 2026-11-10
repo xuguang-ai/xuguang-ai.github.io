@@ -1,6 +1,8 @@
-# Open-source projects, in display order. `install` shows a copyable command. With an odd number of
-# projects the first card spans the full width.
+# Open-source projects. The site lists them by `date` (when the repository was created), newest first, so
+# file order does not matter. `install` shows a copyable command. With an odd number of projects the
+# first card spans the full width.
 - name: SPACESCANS
+  date: "2026-03-10"
   repo: IU-Ultraman/spacescans-web
   href: https://github.com/IU-Ultraman/spacescans-web
   description: >-
@@ -12,7 +14,18 @@
     - label: spacescans.com
       href: https://spacescans.com
 
+- name: BioEval
+  date: "2026-03-02"
+  repo: Yale-BIDS-Chen-Lab/BioEval
+  href: https://github.com/Yale-BIDS-Chen-Lab/BioEval
+  description: >-
+    A self-hosted web platform for benchmarking LLMs on medical NLP tasks: 12 curated medical datasets,
+    inference across cloud and local models, more than 10 metrics, and side-by-side comparison with
+    statistical significance tests.
+  langs: [TypeScript, Python]
+
 - name: End-to-end ChemProt
+  date: "2023-03-31"
   repo: xuguang-ai/end-to-end-ChemProt
   href: https://github.com/xuguang-ai/end-to-end-ChemProt
   description: >-
@@ -21,6 +34,7 @@
   langs: [Python]
 
 - name: TokenBar
+  date: "2026-10-08"
   repo: xuguang-ai/TokenBar
   href: https://github.com/xuguang-ai/TokenBar
   description: >-
