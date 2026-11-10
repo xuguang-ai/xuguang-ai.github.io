@@ -95,8 +95,12 @@ h1.statement {
 .lede { max-width: 640px; margin: 30px 0 0; font-size: clamp(1.05rem, 1.55vw, 1.2rem); line-height: 1.6; color: var(--text-2); }
 .lede strong { color: var(--text); font-weight: 500; }
 .cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 38px; }
+.cta-break { flex-basis: 100%; height: 0; }
+.email-copy .ico-copy { opacity: .75; }
+.email-copy .ico-check, .email-copy.is-copied .ico-copy { display: none; }
+.email-copy.is-copied .ico-check { display: block; }
 .btn {
-  display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 18px; border-radius: 999px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 42px; padding: 0 18px; border-radius: 999px;
   font-size: 15px; font-weight: 500; white-space: nowrap; cursor: pointer;
   transition: transform .2s var(--ease), background-color .2s, border-color .2s, box-shadow .2s;
 }
@@ -241,7 +245,7 @@ h1.statement {
 /* ---------- Publication rows ---------- */
 .pub-list { border-top: 1px solid var(--line); }
 .pub-row {
-  position: relative; display: grid; grid-template-columns: 190px minmax(0, 1fr) 200px; gap: 36px;
+  position: relative; display: grid; grid-template-columns: 190px minmax(0, 1fr) 104px; gap: 36px;
   padding: 32px 0; border-bottom: 1px solid var(--line);
 }
 .pub-row .links { justify-content: flex-end; }
@@ -258,7 +262,7 @@ h1.statement {
 .pub-authors { max-width: 680px; margin: 12px 0 0; color: var(--text-2); }
 .links { display: flex; flex-wrap: wrap; gap: 8px; align-self: start; }
 .lnk {
-  display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 0 11px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 30px; padding: 0 11px;
   border: 1px solid var(--line); border-radius: 999px; background: transparent; cursor: pointer;
   font: 500 12px/1 var(--font-mono); color: var(--text-2); transition: color .2s, border-color .2s, background-color .2s;
 }
@@ -287,9 +291,7 @@ h1.statement {
 .lang { display: inline-flex; align-items: center; gap: 7px; margin-right: 8px; font: 500 12px/1 var(--font-mono); color: var(--text-3); }
 .lang i { width: 8px; height: 8px; border-radius: 50%; background: var(--text-3); }
 
-/* ---------- Publication groups ---------- */
-.pub-group + .pub-group { margin-top: 72px; }
-.pub-group-title { margin: 0 0 18px; font-size: 22px; font-weight: 600; letter-spacing: -.02em; }
+/* ---------- Publication list ---------- */
 .pub-authors b.me { color: var(--text); font-weight: 600; box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--accent) 70%, transparent); }
 /* Rows past the first few stay collapsed until "Show all"; without JavaScript everything is shown. */
 .js .pubs.is-collapsed .pub-more { display: none; }

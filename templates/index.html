@@ -1,5 +1,13 @@
 {% extends "base.html" %}
 {% from "partials/visuals.html" import visual %}
+{% macro email_button() %}
+<button class="btn btn-primary email-copy" type="button" data-copy="{{ profile.email }}" data-done="Copied" title="Copy email address">
+  <svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg>
+  <span data-copy-label aria-live="polite">{{ profile.email }}</span>
+  <svg class="ico ico-copy" aria-hidden="true"><use href="#i-copy"/></svg>
+  <svg class="ico ico-check" aria-hidden="true"><use href="#i-check"/></svg>
+</button>
+{% endmacro %}
 {% block content %}
 <main>
   <!-- Hero -->
@@ -21,10 +29,12 @@
         <h1 class="statement intro" style="--rd:.08s">{{ profile.headline_html|safe }}</h1>
         <p class="lede intro" style="--rd:.16s">{{ profile.lede_html|safe }}</p>
         <div class="cta-row intro" style="--rd:.24s">
-          <a class="btn btn-primary" href="mailto:{{ profile.email }}"><svg class="ico"><use href="#i-mail"/></svg>Get in touch</a>
+          {{ email_button() }}
+          <span class="cta-break" aria-hidden="true"></span>
           <a class="btn btn-ghost" href="{{ profile.links.scholar }}">Google Scholar<svg class="ico"><use href="#i-arrow"/></svg></a>
           <a class="btn btn-ghost" href="{{ profile.links.github }}">GitHub<svg class="ico"><use href="#i-arrow"/></svg></a>
           <a class="btn btn-ghost" href="{{ profile.links.linkedin }}">LinkedIn<svg class="ico"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-ghost" href="{{ profile.links.orcid }}">ORCID<svg class="ico"><use href="#i-arrow"/></svg></a>
         </div>
       </div>
       <figure class="portrait intro" style="--rd:.2s">
@@ -115,33 +125,23 @@
         </div>
       </div>
       <!-- The first {{ pubs_visible }} rows show by default; the rest stay in the page and are revealed by the button (shown only with JavaScript). -->
-      <div class="pubs is-collapsed" id="pubs-list">
-      {% for g in pub_groups %}
-      <div class="pub-group{% if g.collapsed %} pub-more{% endif %}">
-        <h3 class="pub-group-title reveal">{{ g.title }}</h3>
-        <div class="pub-list">
-          {% for p in g.papers %}
-          <article class="pub-row reveal{% if p.collapsed %} pub-more{% endif %}">
-            <div class="pub-meta"><span class="venue">{{ p.venue_name }}</span>{{ p.year }}{% if p.status %} · {{ p.status }}{% endif %}</div>
-            <div>
-              <h4 class="pub-title"><a href="{{ p.url }}">{{ p.title }}</a></h4>
-              <p class="pub-authors">{{ p.authors_html|safe }}</p>
-            </div>
-            <div class="links">
-              <a class="lnk" href="{{ p.url }}">{{ p.main_label }}<svg class="ico"><use href="#i-arrow"/></svg></a>
-              {% if p.pdf %}<a class="lnk" href="{{ p.pdf }}">PDF</a>{% endif %}
-              {% if p.code %}<a class="lnk" href="{{ p.code }}">Code</a>{% endif %}
-              <button class="lnk" type="button" data-copy="{{ p.bibtex }}" data-done="Copied">BibTeX</button>
-            </div>
-          </article>
-          {% endfor %}
-        </div>
+      <div class="pubs pub-list is-collapsed" id="pubs-list">
+        {% for p in papers %}
+        <article class="pub-row reveal{% if p.collapsed %} pub-more{% endif %}">
+          <div class="pub-meta"><span class="venue">{{ p.venue_name }}</span>{{ p.year }}{% if p.status %} · {{ p.status }}{% endif %}</div>
+          <div>
+            <h3 class="pub-title"><a href="{{ p.url }}">{{ p.title }}</a></h3>
+            <p class="pub-authors">{{ p.authors_html|safe }}</p>
+          </div>
+          <div class="links">
+            <a class="lnk" href="{{ p.url }}">{{ p.link_label }}<svg class="ico"><use href="#i-arrow"/></svg></a>
+          </div>
+        </article>
+        {% endfor %}
       </div>
-      {% endfor %}
-      </div>
-      {% if n_papers > pubs_visible %}
+      {% if papers|length > pubs_visible %}
       <button class="btn btn-ghost pubs-toggle" type="button" aria-expanded="false" aria-controls="pubs-list"
-              data-more="Show all {{ n_papers }} publications" data-less="Show fewer">Show all {{ n_papers }} publications</button>
+              data-more="Show all {{ papers|length }} publications" data-less="Show fewer">Show all {{ papers|length }} publications</button>
       {% endif %}
     </div>
   </section>
@@ -204,12 +204,11 @@
       <h2 class="reveal" style="--rd:.06s">{{ profile.contact.heading }}</h2>
       <p class="reveal" style="--rd:.12s">{{ profile.contact.text }}</p>
       <div class="cta-row reveal" style="--rd:.18s">
-        <a class="btn btn-primary" href="mailto:{{ profile.email }}"><svg class="ico"><use href="#i-mail"/></svg>{{ profile.email }}</a>
-        <button class="btn btn-ghost" type="button" data-copy="{{ profile.email }}" data-done="Email copied">Copy email</button>
+        {{ email_button() }}
       </div>
       <footer class="foot">
         <span>© {{ year }} {{ profile.name }} · {{ profile.location }}</span>
-        <span><a href="{{ profile.links.scholar }}">Scholar</a> · <a href="{{ profile.links.github }}">GitHub</a> · <a href="{{ profile.links.linkedin }}">LinkedIn</a></span>
+        <span><a href="{{ profile.links.scholar }}">Scholar</a> · <a href="{{ profile.links.github }}">GitHub</a> · <a href="{{ profile.links.linkedin }}">LinkedIn</a> · <a href="{{ profile.links.orcid }}">ORCID</a></span>
       </footer>
     </div>
   </section>

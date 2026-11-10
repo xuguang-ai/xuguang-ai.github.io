@@ -39,8 +39,6 @@ REDIRECTS = {
 }
 
 LANG_COLORS = {"Python": "#3572a5", "R": "#198ce7", "Swift": "#f05138", "TypeScript": "#3178c6"}
-BIBTEX_FIELDS = ["title", "author", "journal", "booktitle", "series", "volume", "number", "pages",
-                 "year", "publisher", "howpublished", "note", "doi", "url"]
 ALL_AUTHORS_UP_TO = 5  # lists with at most this many authors are shown in full
 PUBS_VISIBLE = 6       # publications shown before "Show all"; the rest are in the page but collapsed
 FORBIDDEN = ["Einstein", "al-folio", "example_pdf", "Lorem ipsum", "TODO"]
@@ -104,15 +102,12 @@ def author_line(authors: list[tuple[str, str]], owner: int, equal: int) -> str:
     return line + (", et al." if shown < n else "")
 
 
-def bibtex_text(entry: dict) -> str:
-    f = entry["fields"]
-    lines = [f"@{entry['type']}{{{entry['key']},"]
-    lines += [f"  {k}={{{f[k]}}}," for k in BIBTEX_FIELDS if k in f]
-    lines[-1] = lines[-1].rstrip(",")
-    return "\n".join(lines) + "\n}"
-
-
 def load_papers() -> list[dict]:
+    """All publications, newest first.
+
+    Sorted by the `date` field (YYYY-MM or YYYY-MM-DD; the year alone if missing). A month-only date
+    sorts after dated entries of the same month; ties keep file order.
+    """
     papers = []
     for entry in parse_bib((CONTENT / "papers.bib").read_text(encoding="utf-8")):
         f, kind = entry["fields"], entry["type"]
@@ -123,38 +118,24 @@ def load_papers() -> list[dict]:
         owner = next((i for i, a in enumerate(authors) if a == OWNER), -1)
         equal = int(f.get("equal", 0))
         doi_url = f"https://doi.org/{f['doi']}" if f.get("doi") else None
-        group = "preprint" if kind == "misc" else f.get("kind", "journal" if kind == "article" else "conference")
         # Short venue label for the left column: an explicit `venue`, else the journal, else `abbr`.
         venue_name = tex(f.get("venue") or (f.get("journal") if kind == "article" else None)
                          or f.get("abbr") or f.get("booktitle") or f.get("howpublished", "Preprint"))
-        status = "Accepted" if f.get("note") == "Accepted" else ("Abstract" if group == "abstract" else "")
+        status = "Accepted" if f.get("note") == "Accepted" else ("Abstract" if f.get("kind") == "abstract" else "")
         papers.append({
             "key": entry["key"],
-            "kind": kind,
-            "group": group,
             "title": tex(f["title"]),
             "year": f["year"],
+            "date": f.get("date", f["year"]),
             "abbr": f.get("abbr", ""),
             "venue_name": venue_name,
             "status": status,
-            "doi": f.get("doi"),
             "url": doi_url or f.get("url") or f.get("preprint"),
-            "main_label": "Paper" if (doi_url or f.get("url")) else "Preprint",
-            "preprint": f.get("preprint"),
-            "pdf": f.get("pdf"),
-            "code": f.get("code"),
-            "n_authors": len(authors),
+            "link_label": "Paper" if (doi_url or f.get("url")) else "Preprint",
             "owner_position": owner + 1,
-            "equal": equal,
             "authors_html": author_line(authors, owner, equal),
-            "bibtex": bibtex_text(entry),
         })
-    return papers
-
-
-def newest_first(papers: list[dict]) -> list[dict]:
-    """Newest year first; file order within a year (sorted() is stable)."""
-    return sorted(papers, key=lambda p: p["year"], reverse=True)
+    return sorted(papers, key=lambda p: p["date"], reverse=True)
 
 
 # ---------------------------------------------------------------- Build
@@ -182,23 +163,14 @@ def build() -> dict:
                 item.setdefault("href", paper["url"])
                 item.setdefault("venue", f"{paper['abbr']} {paper['year']}")
 
-
     software = load_yaml("software.yml")
     for project in software:
         project.setdefault("install", None)
         project.setdefault("links", [])
         project["lang_items"] = [{"name": n, "color": LANG_COLORS.get(n)} for n in project.get("langs", [])]
 
-    reviewed = [p for p in papers if p["group"] != "preprint"]
-    preprints = [p for p in papers if p["group"] == "preprint"]
-    pub_groups = [{"title": "Peer-reviewed", "papers": newest_first(reviewed)},
-                  {"title": "Preprints", "papers": newest_first(preprints)}]
-    rank = 0
-    for g in pub_groups:
-        for p in g["papers"]:
-            p["collapsed"] = rank >= PUBS_VISIBLE
-            rank += 1
-        g["collapsed"] = all(p["collapsed"] for p in g["papers"])
+    for rank, p in enumerate(papers):
+        p["collapsed"] = rank >= PUBS_VISIBLE
 
     person = {
         "@context": "https://schema.org", "@type": "Person", "name": profile["name"], "url": SITE_URL + "/",
@@ -211,7 +183,7 @@ def build() -> dict:
     env.globals.update(asset=asset_url, site_url=SITE_URL, year=dt.date.today().year,
                        person_jsonld=json.dumps(person, ensure_ascii=False).replace("</", "<\\/"))
     ctx = {"profile": profile, "research": research, "software": software,
-           "pub_groups": pub_groups, "n_papers": len(papers), "pubs_visible": PUBS_VISIBLE}
+           "papers": papers, "pubs_visible": PUBS_VISIBLE}
 
     if OUT.exists():
         shutil.rmtree(OUT)
@@ -283,6 +255,8 @@ def check(result: dict) -> list[str]:
             problems.append(f"{p['key']}: the site owner is not among the authors")
         if not p["url"]:
             problems.append(f"{p['key']}: no DOI or URL")
+        if not p["date"].startswith(p["year"]):
+            problems.append(f"{p['key']}: date {p['date']} is not in its year {p['year']}")
     for word in FORBIDDEN:
         for f in OUT.rglob("*.html"):
             if word in f.read_text(encoding="utf-8"):
