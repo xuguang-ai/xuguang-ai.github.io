@@ -30,11 +30,11 @@
         <p class="lede intro" style="--rd:.16s">{{ profile.lede_html|safe }}</p>
         <div class="cta-row intro" style="--rd:.24s">
           {{ email_button() }}
-          <span class="cta-break" aria-hidden="true"></span>
-          <a class="btn btn-ghost" href="{{ profile.links.scholar }}">Google Scholar<svg class="ico"><use href="#i-arrow"/></svg></a>
-          <a class="btn btn-ghost" href="{{ profile.links.github }}">GitHub<svg class="ico"><use href="#i-arrow"/></svg></a>
-          <a class="btn btn-ghost" href="{{ profile.links.linkedin }}">LinkedIn<svg class="ico"><use href="#i-arrow"/></svg></a>
-          <a class="btn btn-ghost" href="{{ profile.links.orcid }}">ORCID<svg class="ico"><use href="#i-arrow"/></svg></a>
+          <div class="cta-icons">
+            {% for key, label, icon in [("scholar", "Google Scholar", "i-scholar"), ("github", "GitHub", "i-github"), ("linkedin", "LinkedIn", "i-linkedin"), ("orcid", "ORCID", "i-orcid")] %}
+            <a class="btn-icon" href="{{ profile.links[key] }}" aria-label="{{ label }}" title="{{ label }}"><svg class="ico-brand" aria-hidden="true"><use href="#{{ icon }}"/></svg></a>
+            {% endfor %}
+          </div>
         </div>
       </div>
       <figure class="portrait intro" style="--rd:.2s">

@@ -96,7 +96,13 @@ h1.statement {
 .lede { max-width: 640px; margin: 30px 0 0; font-size: clamp(1.05rem, 1.55vw, 1.2rem); line-height: 1.6; color: var(--text-2); }
 .lede strong { color: var(--text); font-weight: 500; }
 .cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 38px; }
-.cta-break { flex-basis: 100%; height: 0; }
+.cta-icons { display: flex; gap: 8px; } /* the profile icons wrap together, never split across lines */
+.btn-icon {
+  display: inline-grid; place-items: center; width: 42px; height: 42px; border: 1px solid var(--line-2); border-radius: 999px;
+  color: var(--text-2); transition: transform .2s var(--ease), background-color .2s, border-color .2s, color .2s;
+}
+.btn-icon:hover { border-color: var(--line-3); background: var(--card-2); color: var(--text); transform: translateY(-1px); }
+.ico-brand { width: 18px; height: 18px; }
 .email-copy .ico-copy { opacity: .75; }
 .email-copy .ico-check, .email-copy.is-copied .ico-copy { display: none; }
 .email-copy.is-copied .ico-check { display: block; }
