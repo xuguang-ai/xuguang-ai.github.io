@@ -221,7 +221,7 @@
       </div>
       <footer class="foot">
         <span>© {{ year }} {{ profile.name }} · {{ profile.location }}</span>
-        <span><a href="{{ profile.links.scholar }}">Scholar</a> · <a href="{{ profile.links.github }}">GitHub</a> · <a href="{{ profile.links.linkedin }}">LinkedIn</a> · <a href="{{ profile.links.orcid }}">ORCID</a></span>
+        <span class="foot-icons">{% for key, label, icon in [("scholar", "Google Scholar", "i-scholar"), ("github", "GitHub", "i-github"), ("linkedin", "LinkedIn", "i-linkedin"), ("orcid", "ORCID", "i-orcid")] %}<a href="{{ profile.links[key] }}" aria-label="{{ label }}" title="{{ label }}"><svg class="ico-brand" aria-hidden="true"><use href="#{{ icon }}"/></svg></a>{% endfor %}</span>
       </footer>
     </div>
   </section>

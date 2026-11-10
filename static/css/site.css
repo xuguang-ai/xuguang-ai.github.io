@@ -356,6 +356,8 @@ h1.statement {
 .contact .cta-row { position: relative; }
 .foot { position: relative; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: 96px; padding-top: 22px; border-top: 1px solid var(--line); font: 500 12px/1.6 var(--font-mono); color: var(--text-3); }
 .foot a:hover { color: var(--text); }
+.foot-icons { display: flex; align-items: center; gap: 14px; }
+.foot-icons .ico-brand { width: 16px; height: 16px; display: block; }
 
 /* ---------- 404 ---------- */
 .notfound { min-height: calc(100vh - 64px); display: flex; align-items: center; }
