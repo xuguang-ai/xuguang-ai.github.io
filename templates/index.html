@@ -199,7 +199,7 @@
       <div class="review-grid">
         {% for label, venues in [("Journals", profile.reviewing.journals), ("Conferences", profile.reviewing.conferences)] %}
         <div class="card review-card reveal" style="--rd:{{ loop.index0 * 0.08 }}s" data-spotlight>
-          <div class="rmeta"><span class="idx">{{ label }}</span><span>{{ venues|length }}</span></div>
+          <div class="rmeta"><span class="idx">{{ label }}</span></div>
           <ul class="review-list">
             {% for v in venues %}<li>{{ v }}</li>{% endfor %}
           </ul>
