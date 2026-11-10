@@ -23,7 +23,7 @@ latest:
   text: LEME published in npj Digital Medicine
   href: https://doi.org/10.1038/s41746-026-03104-4
 
-headline_html: I build and evaluate AI for <span class="nowrap">real-world</span> health data.
+headline_html: I build and evaluate AI for medicine and healthcare.
 lede_html: >-
   I'm <strong>Xuguang Ai</strong>, a data scientist at Regenstrief Institute. I extract structured information
   from clinical text, build and evaluate language and multimodal models for medicine, and link where
