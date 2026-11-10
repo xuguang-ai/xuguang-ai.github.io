@@ -134,7 +134,6 @@ def load_papers() -> list[dict]:
             "abbr": f.get("abbr", ""),
             "venue_name": venue_name,
             "url": doi_url or f.get("url") or f.get("preprint"),
-            "link_label": "Paper" if (doi_url or f.get("url")) else "Preprint",
             "owner_position": owner + 1,
             "authors_html": author_line(authors, owner, equal),
         })
