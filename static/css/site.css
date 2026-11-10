@@ -216,8 +216,8 @@ h1.statement {
 /* Visual: image and text inputs feeding one model */
 .viz-mm .edge { fill: none; stroke: var(--line-3); stroke-width: 1.2; stroke-dasharray: 3 5; animation: flow 1.4s linear infinite; }
 .viz-mm .input rect, .viz-mm .node rect { fill: var(--card); stroke: var(--line-2); }
-.viz-mm .eye { fill: var(--accent-soft); stroke: var(--accent); }
-.viz-mm .pupil { fill: var(--accent); }
+.viz-mm .net-e line { stroke: var(--line-3); stroke-width: 1; }
+.viz-mm .net-n circle { fill: var(--card); stroke: var(--accent); stroke-width: 1.4; }
 .viz-mm .txt { stroke: var(--line-3); stroke-width: 3; stroke-linecap: round; }
 .viz-mm .core rect { stroke: var(--accent); filter: drop-shadow(0 0 10px var(--accent-glow)); }
 .viz-mm text { font: 500 9.5px var(--font-mono); fill: var(--text); text-anchor: middle; dominant-baseline: middle; }
