@@ -7,8 +7,8 @@ city: Indianapolis
 location: Indianapolis, IN
 email: xuguang.ai@outlook.com
 description: >-
-  Xuguang Ai is a data scientist at Regenstrief Institute working on clinical natural language processing,
-  language and multimodal models for medicine, and real-world health data.
+  Xuguang Ai is a data scientist at Regenstrief Institute working on clinical NLP, foundation models and
+  AI agents for medicine, AI in ophthalmology, and the exposome.
 
 links:
   scholar: https://scholar.google.com/citations?user=lqV5j78AAAAJ
@@ -25,9 +25,9 @@ latest:
 
 headline_html: I build and evaluate AI for medicine and healthcare.
 lede_html: >-
-  I'm <strong>Xuguang Ai</strong>, a data scientist at Regenstrief Institute. I extract structured information
-  from clinical text, build and evaluate language and multimodal models for medicine, and link where
-  patients live to what they are exposed to.
+  I'm <strong>Xuguang Ai</strong>, a data scientist at Regenstrief Institute. I extract information from
+  clinical text, build and evaluate foundation models and AI agents for medicine, apply AI to eye care, and
+  link where patients live to what they are exposed to.
 
 about_html:
   - >-
