@@ -11,7 +11,6 @@
   --line: rgba(9, 9, 11, .08); --line-2: rgba(9, 9, 11, .14); --line-3: rgba(9, 9, 11, .26);
   --text: #09090b; --text-2: #52525b; --text-3: #6b6b74;
   --dot: rgba(9, 9, 11, .10);
-  --h1-from: #09090b; --h1-to: #5b5b66;
   --accent: #1f5fff; --accent-ink: #1747c9; --accent-soft: rgba(31, 95, 255, .09); --accent-glow: rgba(31, 95, 255, .24);
   --btn-bg: #1f5fff; --btn-text: #ffffff;
   color-scheme: light;
@@ -90,7 +89,7 @@ button { font: inherit; color: inherit; }
 .hero-id { display: none; }
 h1.statement {
   margin: 30px 0 0; font-size: clamp(2.5rem, 5.6vw, 4.5rem); font-weight: 600; line-height: 1.02; letter-spacing: -.045em;
-  background: linear-gradient(180deg, var(--h1-from) 35%, var(--h1-to)); -webkit-background-clip: text; background-clip: text; color: transparent;
+  color: var(--text);
   text-wrap: balance;
 }
 .lede { max-width: 640px; margin: 30px 0 0; font-size: clamp(1.05rem, 1.55vw, 1.2rem); line-height: 1.6; color: var(--text-2); }
