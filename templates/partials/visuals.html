@@ -20,6 +20,16 @@
     <g class="node"><rect x="288" y="72" width="52" height="28" rx="8"/><text x="314" y="87">answer</text></g>
   </svg>
 </div>
+{% elif kind == "eye" %}
+<div class="rviz viz-eye" aria-hidden="true">
+  <svg class="viz-svg" viewBox="0 0 360 172" preserveAspectRatio="xMidYMid meet">
+    <circle class="ring" cx="180" cy="86" r="64" style="--d:0s"/>
+    <circle class="fundus" cx="180" cy="86" r="52"/>
+    <path class="vessel" d="M196 80 C220 60 236 50 226 36M196 90 C224 104 236 120 222 134M188 76 C170 52 150 46 140 56M188 96 C168 118 148 124 138 116"/>
+    <circle class="disc" cx="192" cy="86" r="11"/>
+    <circle class="macula" cx="160" cy="88" r="5"/>
+  </svg>
+</div>
 {% elif kind == "agent" %}
 <div class="rviz viz-agent" aria-hidden="true">
   <svg class="viz-svg" viewBox="0 0 360 172" preserveAspectRatio="xMidYMid meet">

@@ -222,6 +222,13 @@ h1.statement {
 .viz-mm .core rect { stroke: var(--accent); filter: drop-shadow(0 0 10px var(--accent-glow)); }
 .viz-mm text { font: 500 9.5px var(--font-mono); fill: var(--text); text-anchor: middle; dominant-baseline: middle; }
 
+/* Visual: a stylized fundus image */
+.viz-eye .fundus { fill: var(--accent-soft); stroke: var(--line-2); }
+.viz-eye .vessel { fill: none; stroke: var(--accent); stroke-width: 1.4; stroke-linecap: round; opacity: .7; }
+.viz-eye .disc { fill: var(--card); stroke: var(--accent); }
+.viz-eye .macula { fill: var(--accent); opacity: .5; }
+.viz-eye .ring { fill: none; stroke: var(--accent); transform-box: fill-box; transform-origin: center; animation: ring 3.2s var(--ease) infinite; }
+
 /* Visual 3: location episodes linked to an exposure raster */
 .viz-expo .cell { fill: none; stroke: var(--line); stroke-width: 1; }
 .viz-expo .heat rect { fill: var(--accent); }

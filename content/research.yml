@@ -26,22 +26,18 @@
   visual: multimodal
   title: Multimodal and Foundation Models in Medicine
   summary: >-
-    Building and benchmarking open language and multimodal models for medicine, from ophthalmology to
-    dermatology.
+    Building and benchmarking open language and multimodal models for medicine, and studying how
+    they behave.
   tags: [Foundation models, Multimodal, Benchmarks]
   work:
-    - key: kim2026leme
-      title: "LEME: open LLMs for ophthalmology"
-    - key: qin2026volmo
-      title: "VOLMO: versatile open models for ophthalmology"
     - key: kim2026medpmc
       title: "MedPMC: medical multimodal data for foundation models"
     - key: jiang2026multimodal
       title: Multimodal LLMs in clinical dermatology
-    - key: srinivasan2025ophthalmological
-      title: OpenAI o1 vs other LLMs in ophthalmology
-    - key: srinivasan2025benchmarking
-      title: "BELO: an expert-curated ophthalmology benchmark"
+    - key: li2026toward
+      title: Federated LLMs for multi-institutional adaptation
+    - key: li2026memorization
+      title: Memorization in medical LLMs
 
 - index: "03"
   label: Agents
@@ -58,3 +54,39 @@
       title: Agentic chart review from longitudinal clinical notes
     - key: qian2026ehrnavigator
       title: "EHRNavigator: multi-agent question answering over EHRs"
+
+- index: "04"
+  label: Vision
+  visual: eye
+  title: AI in Ophthalmology
+  summary: >-
+    Open models, expert-curated benchmarks and reasoning evaluations for eye care.
+  tags: [Ophthalmology, Benchmarks, Reasoning]
+  work:
+    - key: kim2026leme
+      title: "LEME: open LLMs for ophthalmology"
+    - key: qin2026volmo
+      title: "VOLMO: versatile open models for ophthalmology"
+    - key: srinivasan2025benchmarking
+      title: "BELO: an expert-curated ophthalmology benchmark"
+    - key: srinivasan2025ophthalmological
+      title: OpenAI o1 vs other LLMs in ophthalmology
+    - key: zou2025benchmarking
+      title: Reasoning-focused LLMs on 5,888 ophthalmology items
+    - key: gilson2024enhancing
+      title: Retrieval-augmented LLMs for ophthalmology questions
+
+- index: "05"
+  label: Place
+  visual: exposome
+  title: Exposome for Health
+  summary: >-
+    Linking where people have been to what they were exposed to, for cohorts drawn from real-world health data.
+  tags: [Geospatial linkage, Exposome, Real-world data]
+  work:
+    - title: SPACESCANS web application
+      href: https://github.com/IU-Ultraman/spacescans-web
+      venue: GitHub
+    - title: SPACESCANS website
+      href: https://spacescans.com
+      venue: spacescans.com
